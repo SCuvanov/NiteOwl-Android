@@ -1,0 +1,83 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/ab_height"
+        android:background="@drawable/selectable_background_actionbar" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ImageButton
+                android:id="@+id/btn_refresh"
+                android:layout_width="@dimen/width"
+                android:layout_height="fill_parent"
+                android:background="@drawable/selectable_background_actionbar"
+                android:contentDescription="@string/desc"
+                android:src="@drawable/ico_replay" />
+
+            <LinearLayout
+                android:layout_width="@dimen/dim_1"
+                android:layout_height="fill_parent"
+                android:background="@color/gray_35" >
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/main_banner" />
+
+            <LinearLayout
+                android:layout_width="@dimen/dim_1"
+                android:layout_height="fill_parent"
+                android:background="@color/gray_35" >
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btn_create"
+                android:layout_width="@dimen/width"
+                android:layout_height="fill_parent"
+                android:background="@drawable/selectable_background_actionbar"
+                android:contentDescription="@string/desc"
+                android:src="@drawable/ico_plus" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dim_1"
+        android:background="@color/gray_35" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@drawable/lightgreybackgroundrepeat"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/lst_videos"
+            style="@style/CustomListView"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background_gray4"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:fastScrollEnabled="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dim_1"
+        android:background="@color/black" >
+    </LinearLayout>
+
+</LinearLayout>

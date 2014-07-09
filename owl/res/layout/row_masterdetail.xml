@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/transparent"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/dim_10"
+              android:paddingLeft="@dimen/dim_20"
+              android:paddingRight="@dimen/dim_20"
+              android:paddingTop="@dimen/dim_10">
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_35"
+            android:orientation="vertical">
+
+        <ImageView
+                android:id="@+id/image"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dim_10"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/desc"
+                android:scaleType="fitCenter"
+                android:src="@drawable/brave"/>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dip"
+                android:layout_marginBottom="@dimen/dim_10"
+                android:layout_marginLeft="@dimen/dim_10"
+                android:layout_marginRight="@dimen/dim_10"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/text_name"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:tag="bold"
+                    android:text="@string/txt_some_longtext"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/tex_size_xxlarge"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:id="@+id/text_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="bold"
+                    android:text="@string/txt_some_price"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/tex_size_xxlarge"
+                    android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/divider_size"
+                android:background="@color/gray_46"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"/>
+
+        <TextView
+                android:id="@+id/text_desc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dim_10"
+                android:ellipsize="end"
+                android:lines="2"
+                android:text="@string/txt_some_longtext"
+                android:textColor="@color/gray_167"
+                android:textSize="@dimen/tex_size_normal"/>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/height"
+                android:background="@color/green"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_read_more"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/tex_size_xlarge"
+                    android:textStyle="bold"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

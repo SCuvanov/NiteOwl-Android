@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@drawable/lightgreybackgroundrepeat"
+              android:orientation="vertical">
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/ab_height"
+            android:background="@drawable/selectable_background_actionbar">
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+            <ImageButton
+                    android:id="@+id/btn_back"
+                    android:layout_width="@dimen/width"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/selectable_background_actionbar"
+                    android:contentDescription="@string/desc"
+                    android:src="@drawable/ico_left"/>
+
+            <LinearLayout
+                    android:layout_width="@dimen/dim_1"
+                    android:layout_height="fill_parent"
+                    android:background="@color/gray_35">
+            </LinearLayout>
+
+            <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/event_banner"/>
+
+            <LinearLayout
+                    android:layout_width="@dimen/dim_1"
+                    android:layout_height="fill_parent"
+                    android:background="@color/gray_35">
+            </LinearLayout>
+
+            <ImageButton
+                    android:id="@+id/btn_refresh"
+                    android:layout_width="@dimen/width"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/selectable_background_actionbar"
+                    android:contentDescription="@string/desc"
+                    android:src="@drawable/ico_replay"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dim_1"
+            android:background="@color/gray_35">
+    </LinearLayout>
+
+    <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1">
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/desc"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/brave"/>
+
+            <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/whitebackgroundrepeat"
+                    android:orientation="vertical">
+
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dip"
+                        android:layout_marginBottom="@dimen/dim_10"
+                        android:layout_marginLeft="@dimen/dim_10"
+                        android:layout_marginRight="@dimen/dim_10"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:id="@+id/text_title"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:tag="bold"
+                            android:text="@string/txt_some_title"
+                            android:textColor="@color/purple"
+                            android:textSize="@dimen/tex_size_xxlarge"
+                            android:textStyle="bold"/>
+
+                    <TextView
+                            android:id="@+id/text_time"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:gravity="right"
+                            android:singleLine="true"
+                            android:tag="bold"
+                            android:text="@string/txt_some_time"
+                            android:textColor="@color/purple"
+                            android:textSize="@dimen/tex_size_xxlarge"
+                            android:textStyle="bold"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/gray_189"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                </LinearLayout>
+
+                <TextView
+                        android:id="@+id/text_desc"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dim_10"
+                        android:text="@string/txt_some_longtext"
+                        android:textColor="@color/gray_79"
+                        android:textSize="@dimen/tex_size_normal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/whitebackgroundrepeat"
+                    android:orientation="horizontal">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1">
+
+                    <ImageButton
+                            android:id="@+id/btn_friendchooser"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/transparent_background_selector"
+                            android:contentDescription="@string/desc"
+                            android:src="@drawable/ico_friends"/>
+
+                    <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="fill_parent"
+                            android:background="@color/gray_189">
+                    </LinearLayout>
+
+                    <ImageButton
+                            android:id="@+id/btn_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/transparent_background_selector"
+                            android:contentDescription="@string/desc"
+                            android:src="@drawable/map_ico"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

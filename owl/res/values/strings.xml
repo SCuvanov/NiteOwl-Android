@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">NiteOwl</string>
+    <string name="app_id">1443878089195864</string>
+    <string name="action_settings">Settings</string>
+    <string name="main_header">FLAT CONTROLS</string>
+    <string name="btn_login">Log In</string>
+    <string name="btn_facebook">Facebook</string>
+    <string name="btn_register">Sign Up</string>
+    <string name="google_signin">Google</string>
+    <string name="facebook_signin">Facebook Sign In</string>
+    <string name="google_signout">Sign Out</string>
+    <string name="btn_name">Login</string>
+    <string name="txt_email">Email Address</string>
+    <string name="txt_password">Password</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="txt_password2">Re-type Password</string>
+    <string name="txt_title">Title</string>
+    <string name="txt_description">Description</string>
+    <string name="txt_username">Username</string>
+    <string name="txt_signup_header">Sign Up</string>
+    <string name="txt_some_header">Something Special</string>
+    <string name="txt_or">Or Use</string>
+    <string name="txt_yes">YES</string>
+    <string name="txt_no">NO</string>
+    <string name="txt_maybe">MAYBE</string>
+    <string name="txt_android">Adroid</string>
+    <string name="txt_ios">iOS</string>
+    <string name="desc"></string>
+    <string name="title_activity_navi">NaviActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="lbl_title"></string>
+    <string name="lbl_user"></string>
+    <string name="lbl_feed"></string>
+    <string name="txt_first">First Name</string>
+    <string name="txt_last">Last Name</string>
+    <string name="txt_some_title">Hotel Havana</string>
+    <string name="txt_some_longtext">Manny, Diego, and Sid embark upon another adventure after their continent is set
+        adrift. Using an iceberg as a ship, they encounter sea creatures and battle pirates as they explore a new world.</string>
+    <string name="title_activity_blankactivity">Blankactivity</string>
+    <string name="title_activity_master">MasterActivity</string>
+    <string name="title_section1">Feed</string>
+    <string name="title_section2">Huddle</string>
+    <string name="title_section3">User</string>
+    <string name="title_activity_intro">IntroActivity</string>
+    <string name="title_activity_intro_fragment">IntroFragment</string>
+    <string name="title_activity_user_fragment">UserFragment</string>
+    <string name="title_activity_feed_fragment">FeedFragment</string>
+    <string name="txt_menu_swipe">Swipe Example</string>
+    <string name="txt_menu_masterdetail">Master Detail</string>
+    <string name="txt_menu_CheckList">Check List</string>
+    <string name="txt_some_price">$60</string>
+    <string name="txt_some_time"></string>
+    <string name="txt_read_more">READ MORE</string>
+    <string name="title_activity_create_event_fragment">CreateEventFragment</string>
+    <string name="title_activity_create_event">CreateEventActivity</string>
+    <string name="title_activity_time_picker_fragment">TimePickerFragment</string>
+    <string name="title_activity_date_picker_fragment">DatePickerFragment</string>
+    <string name="title_activity_user_details">UserDetailsActivity</string>
+    <string name="title_activity_user">UserActivity</string>
+
+</resources>

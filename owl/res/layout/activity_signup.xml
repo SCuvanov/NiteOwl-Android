@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@drawable/lightgreybackgroundrepeat"
+              android:orientation="vertical">
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/ab_height"
+            android:background="@drawable/selectable_background_actionbar">
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+            <ImageButton
+                    android:id="@+id/btn_back2"
+                    android:layout_width="@dimen/width"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/selectable_background_actionbar"
+                    android:contentDescription="@string/desc"
+                    android:src="@drawable/ico_left"/>
+
+            <LinearLayout
+                    android:layout_width="@dimen/dim_1"
+                    android:layout_height="fill_parent"
+                    android:background="@color/gray_35">
+            </LinearLayout>
+
+            <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/signupbanner"/>
+
+            <LinearLayout
+                    android:layout_width="@dimen/dim_1"
+                    android:layout_height="fill_parent"
+                    android:background="@color/gray_35">
+            </LinearLayout>
+
+            <ImageButton
+                    android:id="@+id/btn_confirm2"
+                    android:layout_width="@dimen/width"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/selectable_background_actionbar"
+                    android:contentDescription="@string/desc"
+                    android:src="@drawable/ico_check"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dim_1"
+            android:background="@color/gray_35">
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:padding="5dp"
+                android:background="@drawable/white_background_simple"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:background="@drawable/edit_text_holo_light"
+                    android:hint="@string/txt_username"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:id="@+id/editTextUsername"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:background="@drawable/edit_text_holo_light"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:hint="@string/txt_email"
+                    android:ems="10"
+                    android:id="@+id/editTextEmail"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/edit_text_holo_light"
+                    android:inputType="textPassword"
+                    android:hint="@string/txt_password"
+                    android:ems="10"
+                    android:id="@+id/editTextPassword" android:layout_gravity="center_horizontal"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/edit_text_holo_light"
+                    android:inputType="textPassword"
+                    android:hint="@string/txt_password2"
+                    android:ems="10"
+                    android:id="@+id/editTextPassword2" android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:padding="5dp"
+                android:background="@drawable/white_background_simple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content">
+                <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="1"
+                        android:button="@drawable/apptheme_btn_radio_holo_light"
+                        android:text="Male"
+                        android:id="@+id/radioButton2"/>
+                <RadioButton
+                        android:layout_width="wrap_content"
+                        android:button="@drawable/apptheme_btn_radio_holo_light"
+                        android:layout_height="wrap_content"
+                        android:text="Female"
+                        android:id="@+id/radioButton"/>
+            </RadioGroup>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
