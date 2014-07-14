@@ -21,19 +21,12 @@
             android:layout_gravity="center"
             android:src="@drawable/main_banner2" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/owl_banner" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="60dp"
             android:background="@drawable/dark_transparent_background"
             android:orientation="vertical"
             android:padding="5dp" >
@@ -87,8 +80,8 @@
                         android:id="@+id/sign_in_button"
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/dim_50"
-                        android:layout_weight="1"
                         android:layout_marginRight="3dp"
+                        android:layout_weight="1"
                         android:background="@drawable/ui_button_white"
                         android:text="Sign In"
                         android:textColor="@color/dark_purple"
@@ -98,38 +91,37 @@
                         android:id="@+id/sign_up_button"
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/dim_50"
-                        android:layout_weight="1"
                         android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
                         android:background="@drawable/ui_button_white"
                         android:text="Sign Up"
                         android:textColor="@color/dark_purple"
                         android:textStyle="bold" />
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/textViewForgotPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:onClick="showAlertDialog"
+                    android:text="Forgot Password?"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
                 <Button
                     android:id="@+id/facebook_button"
                     android:layout_width="fill_parent"
                     android:layout_height="@dimen/dim_50"
                     android:layout_marginTop="5dp"
-                    android:gravity="center"
                     android:background="@drawable/ui_button_facebook"
+                    android:gravity="center"
                     android:text="Log in with Facebook"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/textViewForgotPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:onClick="showAlertDialog"
-                android:text="Forgot Password?"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
         </LinearLayout>
     </LinearLayout>
-    
-    
 
 </LinearLayout>

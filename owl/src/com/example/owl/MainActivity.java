@@ -22,6 +22,7 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class MainActivity extends Activity implements OnClickListener {
 
@@ -58,7 +59,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		// Check if there is a currently logged in user
 		// and they are linked to a Facebook account.
-		ParseUser currentUser = ParseUser.getCurrentUser();
+		final ParseUser currentUser = ParseUser.getCurrentUser();
 		if ((currentUser != null)) {
 
 			// you can add this line &&
@@ -68,6 +69,8 @@ public class MainActivity extends Activity implements OnClickListener {
 			// Go to the user info activity
 			showPrimaryActivity();
 		}
+
+		
 	}
 
 	@Override
@@ -192,10 +195,10 @@ public class MainActivity extends Activity implements OnClickListener {
 			Log.e(TAG, "Tapped forgot password");
 			// prompt user with dialog to enter email
 			
-			//String forgotPasswordEmail = etForgotPasswordEmail.getText().toString().trim();
-			
-			
-
+//			String forgotPasswordEmail = etForgotPasswordEmail.getText().toString().trim();
+//			
+//			
+//
 //			ParseUser.requestPasswordResetInBackground(forgotPasswordEmail,
 //					new RequestPasswordResetCallback() {
 //						public void done(ParseException e) {

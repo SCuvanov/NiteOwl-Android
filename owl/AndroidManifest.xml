@@ -72,10 +72,6 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.owl.UserDetailsActivity"
-            android:label="@string/title_activity_user_details" >
-        </activity>
-        <activity
             android:name="com.example.owl.UserActivity"
             android:label="@string/title_activity_user" >
         </activity>

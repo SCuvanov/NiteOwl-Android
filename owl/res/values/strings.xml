@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">NiteOwl</string>
-    <string name="app_id">1443878089195864</string>
+    <string name="app_id">263090087213217</string>
     <string name="action_settings">Settings</string>
     <string name="main_header">FLAT CONTROLS</string>
     <string name="btn_login">Log In</string>
@@ -37,9 +37,8 @@
     <string name="lbl_feed"></string>
     <string name="txt_first">First Name</string>
     <string name="txt_last">Last Name</string>
-    <string name="txt_some_title">Hotel Havana</string>
-    <string name="txt_some_longtext">Manny, Diego, and Sid embark upon another adventure after their continent is set
-        adrift. Using an iceberg as a ship, they encounter sea creatures and battle pirates as they explore a new world.</string>
+    <string name="txt_some_title"></string>
+    <string name="txt_some_longtext"></string>
     <string name="title_activity_blankactivity">Blankactivity</string>
     <string name="title_activity_master">MasterActivity</string>
     <string name="title_section1">Feed</string>
