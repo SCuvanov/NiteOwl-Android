@@ -24,6 +24,7 @@ import com.example.owl.adapter.SwipeAdapter;
 import com.example.owl.model.VideoItem;
 import com.example.owl.model.VideoList;
 import com.example.owl.utils.Utils;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 
 public class SwipeActivity extends Fragment implements OnClickListener,
         OnItemClickListener {
@@ -96,9 +97,15 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 
         lstVideos = VideoList.getVideoList();
 
-        listView.setAdapter(new SwipeAdapter(getActivity(), lstVideos));
-        listView.setOnItemClickListener(this);
+        //swipe adapter
+        SwipeAdapter swipeAdapter = new SwipeAdapter(getActivity(), lstVideos);
 
+        
+        //create animation adapter
+        SwingBottomInAnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(swipeAdapter);
+        animAdapter.setAbsListView(listView);
+        listView.setAdapter(animAdapter);
+        listView.setOnItemClickListener(this);
         this.initAnimation();
 
         Utils.setFontAllView(theLayout);

@@ -69,6 +69,19 @@ public class MainActivity extends Activity implements OnClickListener {
 			// Go to the user info activity
 			showPrimaryActivity();
 		}
+		
+	 
+//		 if (!ParseFacebookUtils.isLinked(currentUser)) {
+//			  ParseFacebookUtils.link(currentUser, this, new SaveCallback() {
+//			    @Override
+//			    public void done(ParseException ex) {
+//			      if (ParseFacebookUtils.isLinked(currentUser)) {
+//			        Log.d("MyApp", "Woohoo, user logged in with Facebook!");
+//			      }
+//			    }
+//			  });
+//			}
+		
 
 		
 	}

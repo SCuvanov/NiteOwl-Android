@@ -12,105 +12,132 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.owl.model.Event;
 import com.parse.Parse;
+import com.parse.ParseACL;
+import com.parse.ParseException;
 import com.parse.ParseObject;
-
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class CreateEventActivity extends FragmentActivity implements
-        OnClickListener {
+		OnClickListener {
 
-    ImageButton btnBack;
-    ImageButton btnCreatePic;
-    ImageButton btnConfirm;
+	ImageButton btnBack;
+	ImageButton btnCreatePic;
+	ImageButton btnConfirm;
 
-    private static int RESULT_LOAD_IMAGE = 2;
+	private static int RESULT_LOAD_IMAGE = 2;
+
+	EditText etDesc;
+	EditText etTitle;
+	Button btTime;
+	Button btDate;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_create_event);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
-    EditText etDesc;
-    EditText etTitle;
-    Button etTime;
+		btnBack = (ImageButton) findViewById(R.id.btn_back1);
+		btnBack.setOnClickListener(this);
 
+		btnCreatePic = (ImageButton) findViewById(R.id.btn_create_pic);
+		btnCreatePic.setOnClickListener(this);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_event);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		btnConfirm = (ImageButton) findViewById(R.id.btn_confirm);
+		btnConfirm.setOnClickListener(this);
 
-        ///////PARSE//////
-        Parse.initialize(this, "84A4VkKcDQCNDZWeCtIx62TtkoGufWUWlgEBNcR6", "NRg7OnjI3yqsGapBJ4ZczfkQEkCWd4Dqc9ufDpnV");
+		// edit text
+		etDesc = (EditText) findViewById(R.id.editTextDesc);
+		etTitle = (EditText) findViewById(R.id.editTextTitle);
+		btTime = (Button) findViewById(R.id.btn_time);
+		btDate = (Button) findViewById(R.id.btn_date);
 
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();
-        //////////////////////////////////////////////////////
+	}
 
-        btnBack = (ImageButton) findViewById(R.id.btn_back1);
-        btnBack.setOnClickListener(this);
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.create_event, menu);
+		return true;
+	}
 
-        btnCreatePic = (ImageButton) findViewById(R.id.btn_create_pic);
-        btnCreatePic.setOnClickListener(this);
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
 
-        btnConfirm = (ImageButton) findViewById(R.id.btn_confirm);
-        btnConfirm.setOnClickListener(this);
+		case (R.id.btn_back1):
 
-        // edit text
-        etDesc = (EditText) findViewById(R.id.editTextDesc);
-        etTitle = (EditText) findViewById(R.id.editTextTitle);
-        etTime = (Button) findViewById(R.id.btn_time);
+			finish();
+			break;
 
-    }
+		case (R.id.btn_create_pic):
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.create_event, menu);
-        return true;
-    }
+			Intent intent = new Intent();
+			intent.setType("image/*");
+			intent.setAction(Intent.ACTION_GET_CONTENT);
+			startActivityForResult(
+					Intent.createChooser(intent, "Select Picture"),
+					RESULT_LOAD_IMAGE);
+			break;
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+		case (R.id.btn_confirm):
+			String title;
+			String desc;
+			String time;
+			String date;
 
-            case (R.id.btn_back1):
+			title = etTitle.getText().toString();
+			desc = etDesc.getText().toString();
+			time = btTime.getText().toString();
+			date = btDate.getText().toString();
 
-                finish();
-                break;
+			// define event object
+			Event newEvent = new Event();
+			newEvent.setTitle(title);
+			newEvent.setDesc(desc);
+			newEvent.setTime(time);
+			newEvent.setDate(date);
+			newEvent.setUser(ParseUser.getCurrentUser());
 
-            case (R.id.btn_create_pic):
+			// create access control list, and set object to read-only
+			ParseACL acl = new ParseACL();
+			acl.setPublicReadAccess(true);
+			newEvent.setACL(acl);
 
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(
-                        Intent.createChooser(intent, "Select Picture"),
-                        RESULT_LOAD_IMAGE);
-                break;
+			// publish to ParseDB
+			newEvent.saveInBackground(new SaveCallback() {
+				@Override
+				public void done(ParseException e) {
+					// Update the display 
+					showPrimaryActivity();
+				}
+			});
 
-            case (R.id.btn_confirm):
-                String title;
-                String desc;
-                String time;
+			// Log.e("Title", etTitle.getText().toString());
+			// Log.e("Desc", etDesc.getText().toString());
+			// Log.e("Time", etTime.getText().toString());
+			break;
+		}
+	}
 
-                title = etTitle.getText().toString();
-                desc = etDesc.getText().toString();
-                time = etTime.getText().toString();
+	public void showTimePickerDialog(View v) {
+		DialogFragment newFragment = new TimePickerFragment();
+		newFragment.show(getFragmentManager(), "timePicker");
+	}
 
-                //Log.e("Title", etTitle.getText().toString());
-                //Log.e("Desc", etDesc.getText().toString());
-                //Log.e("Time", etTime.getText().toString());
-                break;
-        }
-    }
-
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getFragmentManager(), "timePicker");
-    }
-
-    public void showDatePickerDialog(View v) {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getFragmentManager(), "datePicker");
-    }
+	public void showDatePickerDialog(View v) {
+		DialogFragment newFragment = new DatePickerFragment();
+		newFragment.show(getFragmentManager(), "datePicker");
+	}
+	
+	private void showPrimaryActivity() {
+		Intent intent = new Intent(this, NaviActivity.class);
+		startActivity(intent);
+		finish();
+	}
 
 }

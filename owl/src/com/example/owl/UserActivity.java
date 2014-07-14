@@ -24,8 +24,10 @@ import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.ProfilePictureView;
+import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class UserActivity extends Fragment implements OnClickListener,
 		OnItemClickListener {
@@ -74,6 +76,7 @@ public class UserActivity extends Fragment implements OnClickListener,
 		userNameView = (TextView) mLayout.findViewById(R.id.text_name);
 		 userProfilePictureView = (ProfilePictureView)
 		 mLayout.findViewById(R.id.userProfilePicture);
+		 
 
 		return mLayout;
 	}
