@@ -72,6 +72,11 @@ public class UserActivity extends Fragment implements OnClickListener,
 		Button logoutButton = (Button) mLayout
 				.findViewById(R.id.log_out_button);
 		logoutButton.setOnClickListener(this);
+		
+		Button linkFacebookButton = (Button) mLayout
+				.findViewById(R.id.link_facebook_button);
+		linkFacebookButton.setOnClickListener(this);
+		
 
 		userNameView = (TextView) mLayout.findViewById(R.id.text_name);
 		 userProfilePictureView = (ProfilePictureView)
@@ -112,6 +117,24 @@ public class UserActivity extends Fragment implements OnClickListener,
 			Log.e(TAG, "Tapped sign out");
 			onLogoutButtonClicked();
 			break;
+			
+		case R.id.link_facebook_button:
+			Log.e(TAG, "Tapped link facebook");
+			
+			final ParseUser currentUser = ParseUser.getCurrentUser(); 
+			
+			if (!ParseFacebookUtils.isLinked(currentUser)) {
+				  ParseFacebookUtils.link(currentUser, getActivity(), new SaveCallback() {
+				    @Override
+				    public void done(ParseException ex) {
+				      if (ParseFacebookUtils.isLinked(currentUser)) {
+				        Log.d("MyApp", "Woohoo, user logged in with Facebook!");
+				        makeMeRequest();
+				      }
+				    }
+				  });
+				}
+			
 
 		}
 

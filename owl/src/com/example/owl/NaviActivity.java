@@ -157,6 +157,7 @@ public class NaviActivity extends FragmentActivity implements
     private void initialiseTabHost(Bundle args) {
         mTabHost = (TabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup();
+        mTabHost.getTabWidget().setDividerDrawable(null);
 
         addTab(R.string.lbl_title, R.drawable.ico_list, SwipeActivity.class,
                 args);

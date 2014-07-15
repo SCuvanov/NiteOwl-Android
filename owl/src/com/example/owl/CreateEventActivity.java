@@ -1,6 +1,8 @@
 package com.example.owl;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -13,10 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.example.owl.model.Event;
-import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -26,6 +26,7 @@ public class CreateEventActivity extends FragmentActivity implements
 	ImageButton btnBack;
 	ImageButton btnCreatePic;
 	ImageButton btnConfirm;
+	private Dialog progressDialog;
 
 	private static int RESULT_LOAD_IMAGE = 2;
 
@@ -39,7 +40,6 @@ public class CreateEventActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_event);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
 
 		btnBack = (ImageButton) findViewById(R.id.btn_back1);
 		btnBack.setOnClickListener(this);
@@ -108,12 +108,17 @@ public class CreateEventActivity extends FragmentActivity implements
 			acl.setPublicReadAccess(true);
 			newEvent.setACL(acl);
 
+			CreateEventActivity.this.progressDialog = ProgressDialog.show(
+					CreateEventActivity.this, "", "Roasting Marshmallows...",
+					true);
+
 			// publish to ParseDB
 			newEvent.saveInBackground(new SaveCallback() {
 				@Override
 				public void done(ParseException e) {
-					// Update the display 
+					// Update the display
 					showPrimaryActivity();
+					progressDialog.dismiss();
 				}
 			});
 
@@ -133,7 +138,7 @@ public class CreateEventActivity extends FragmentActivity implements
 		DialogFragment newFragment = new DatePickerFragment();
 		newFragment.show(getFragmentManager(), "datePicker");
 	}
-	
+
 	private void showPrimaryActivity() {
 		Intent intent = new Intent(this, NaviActivity.class);
 		startActivity(intent);

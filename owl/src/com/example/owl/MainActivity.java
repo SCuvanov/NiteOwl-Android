@@ -48,7 +48,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		// sign in button
 		findViewById(R.id.sign_in_button).setOnClickListener(this);
 		findViewById(R.id.sign_up_button).setOnClickListener(this);
-		findViewById(R.id.facebook_button).setOnClickListener(this);
 
 		// edittexts
 		etSignInUsername = (EditText) findViewById(R.id.editTextSignInUsername);
@@ -69,21 +68,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			// Go to the user info activity
 			showPrimaryActivity();
 		}
-		
-	 
-//		 if (!ParseFacebookUtils.isLinked(currentUser)) {
-//			  ParseFacebookUtils.link(currentUser, this, new SaveCallback() {
-//			    @Override
-//			    public void done(ParseException ex) {
-//			      if (ParseFacebookUtils.isLinked(currentUser)) {
-//			        Log.d("MyApp", "Woohoo, user logged in with Facebook!");
-//			      }
-//			    }
-//			  });
-//			}
-		
 
-		
 	}
 
 	@Override
@@ -127,7 +112,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		startActivity(intent);
 		finish();
 	}
-	
+
 	public void showAlertDialog(View v) {
 		DialogFragment newFragment = new AlertDialogFragment();
 		newFragment.show(getFragmentManager(), "Forgot Password");
@@ -200,30 +185,27 @@ public class MainActivity extends Activity implements OnClickListener {
 			Log.e(TAG, "Tapped sign up");
 			break;
 
-		case R.id.facebook_button:
-			onLoginButtonClicked();
-			break;
-
 		case R.id.textViewForgotPassword:
 			Log.e(TAG, "Tapped forgot password");
 			// prompt user with dialog to enter email
-			
-//			String forgotPasswordEmail = etForgotPasswordEmail.getText().toString().trim();
-//			
-//			
-//
-//			ParseUser.requestPasswordResetInBackground(forgotPasswordEmail,
-//					new RequestPasswordResetCallback() {
-//						public void done(ParseException e) {
-//							if (e == null) {
-//								// An email was successfully sent with reset
-//								// instructions.
-//							} else {
-//								// Something went wrong. Look at the
-//								// ParseException to see what's up.
-//							}
-//						}
-//					});
+
+			// String forgotPasswordEmail =
+			// etForgotPasswordEmail.getText().toString().trim();
+			//
+			//
+			//
+			// ParseUser.requestPasswordResetInBackground(forgotPasswordEmail,
+			// new RequestPasswordResetCallback() {
+			// public void done(ParseException e) {
+			// if (e == null) {
+			// // An email was successfully sent with reset
+			// // instructions.
+			// } else {
+			// // Something went wrong. Look at the
+			// // ParseException to see what's up.
+			// }
+			// }
+			// });
 
 			break;
 

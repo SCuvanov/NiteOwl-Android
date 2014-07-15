@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="90dp"
             android:background="@drawable/dark_transparent_background"
             android:orientation="vertical"
             android:padding="5dp" >
@@ -104,22 +104,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="15dp"
                     android:onClick="showAlertDialog"
                     android:text="Forgot Password?"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <Button
-                    android:id="@+id/facebook_button"
-                    android:layout_width="fill_parent"
-                    android:layout_height="@dimen/dim_50"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/ui_button_facebook"
-                    android:gravity="center"
-                    android:text="Log in with Facebook"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
