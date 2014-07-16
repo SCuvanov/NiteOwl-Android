@@ -3,8 +3,9 @@ package com.example.owl;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -16,6 +17,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,7 +26,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.owl.adapter.EventQueryAdapter;
-import com.example.owl.adapter.SwipeAdapter;
 import com.example.owl.model.Event;
 import com.example.owl.model.VideoItem;
 import com.example.owl.utils.Utils;
@@ -35,7 +37,7 @@ import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 
 public class SwipeActivity extends Fragment implements OnClickListener,
-		OnItemClickListener {
+		OnItemClickListener, OnItemLongClickListener {
 
 	ListView listView;
 	int lastIndex = -1;
@@ -110,22 +112,18 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 		this.vw_detail.setVisibility(View.GONE);
 
 		// ///// PARSE QUERIES ////////
-
 		eventQueryAdapter = new EventQueryAdapter(getActivity());
-
-		//listView.setAdapter(eventQueryAdapter);
 		eventQueryAdapter.loadObjects();
 
 		// create animation adapter
-		 SwingBottomInAnimationAdapter animAdapter = new
-		 SwingBottomInAnimationAdapter(
-		 eventQueryAdapter);
-		 animAdapter.setAbsListView(listView);
-		 listView.setAdapter(animAdapter);
-		 listView.setOnItemClickListener(this);
-		 this.initAnimation();
+		SwingBottomInAnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
+				eventQueryAdapter);
+		animAdapter.setAbsListView(listView);
+		listView.setAdapter(animAdapter);
+		listView.setOnItemClickListener(this);
+		listView.setOnItemLongClickListener(this);
 
-		doEventQuery();
+		this.initAnimation();
 
 		Utils.setFontAllView(theLayout);
 		return theLayout;
@@ -150,18 +148,65 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 		this._isBack = false;
 		showView(this._isBack);
 
-		if (adp != null && adp.getAdapter() instanceof SwipeAdapter) {
-			SwipeAdapter newsAdp = (SwipeAdapter) adp.getAdapter();
-			VideoItem itm = newsAdp.getItem(position);
+		if (adp != null && adp.getAdapter() instanceof EventQueryAdapter) {
+			EventQueryAdapter newsAdp = (EventQueryAdapter) adp.getAdapter();
+			Event itm = newsAdp.getItem(position);
 
-			tvTitle.setText(itm.get_title());
-			tvDesc.setText(itm.get_desc());
-			tvTime.setText(itm.get_time());
-			Bitmap bmp = Utils.GetImageFromAssets(getActivity(), "images/"
-					+ itm.get_image());
-			img.setImageBitmap(bmp);
+			tvTitle.setText(itm.getTitle());
+			tvDesc.setText(itm.getDesc());
+			tvTime.setText(itm.getTime());
+			// Bitmap bmp = Utils.GetImageFromAssets(getActivity(), "images/"
+			// + itm.get_image());
+			// img.setImageBitmap(bmp);
 		}
 
+	}
+
+	@Override
+	public boolean onItemLongClick(AdapterView<?> parent, View view,
+			int position, long id) {
+		// TODO Auto-generated method stub
+
+		LayoutInflater li = LayoutInflater.from(getActivity());
+		View dialogView = li.inflate(R.layout.dialog_view, null);
+
+		AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+		builder1.setView(dialogView);
+
+		builder1.setCancelable(true);
+		builder1.setPositiveButton("Yes",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+		builder1.setNegativeButton("No", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
+
+		AlertDialog alertDialog = builder1.create();
+		alertDialog.show();
+
+		Button nButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+		if (nButton != null) {
+			nButton.setBackground(getResources().getDrawable(
+					R.drawable.white_background_selector));
+			nButton.setTextSize(20);
+			nButton.setTextColor(getResources().getColor(R.color.red));
+		}
+
+		Button pButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+		if (pButton != null) {
+			pButton.setBackground(getResources().getDrawable(
+					R.drawable.white_background_selector));
+			pButton.setTextSize(20);
+			pButton.setTextColor(getResources().getColor(R.color.green));
+		}
+
+		Log.e("onItemLongClick", "Item Clicked");
+		return true;
 	}
 
 	private void showView(boolean isBack) {
@@ -228,4 +273,5 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 			}
 		});
 	}
+
 }
