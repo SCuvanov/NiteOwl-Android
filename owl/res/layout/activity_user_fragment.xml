@@ -28,7 +28,7 @@
                 android:tag="bold"
                 android:text="@string/app_id"
                 android:textColor="@color/white"
-                android:textSize="@dimen/tex_size_xxlarge"
+                android:textSize="@dimen/tex_size_xxxlarge"
                 android:textStyle="bold" />
 
             <LinearLayout

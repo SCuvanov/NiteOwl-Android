@@ -1,11 +1,13 @@
 package com.example.owl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -20,18 +22,17 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.owl.adapter.EventQueryAdapter;
 import com.example.owl.model.Event;
-import com.example.owl.model.VideoItem;
 import com.example.owl.utils.Utils;
-import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseImageView;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
@@ -41,9 +42,8 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 
 	ListView listView;
 	int lastIndex = -1;
-	ArrayList<VideoItem> lstVideos;
 
-	ArrayList<Event> lstEvents;
+	List<Event> lstEvents;
 
 	private ParseQueryAdapter<Event> mainAdapter;
 	private EventQueryAdapter eventQueryAdapter;
@@ -53,8 +53,8 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 	View vw_detail;
 
 	// detail view
-	TextView tvTitle, tvTitle1, tvPrice, tvDesc, tvTime;
-	ImageView img;
+	TextView tvTitle, tvTitle1, tvPrice, tvDesc, tvTime, tvDate;
+	ParseImageView ivDetailPicture, ivRowPicture;
 	ImageButton btnBack, btnCreate;
 
 	// animation
@@ -97,10 +97,12 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 		listView = (ListView) this.vw_master.findViewById(R.id.lst_videos);
 
 		// get detail controls
-		tvTitle = (TextView) this.vw_detail.findViewById(R.id.text_title);
-		tvDesc = (TextView) this.vw_detail.findViewById(R.id.text_desc);
-		tvTime = (TextView) this.vw_detail.findViewById(R.id.text_time);
-		img = (ImageView) this.vw_detail.findViewById(R.id.image);
+		tvTitle = (TextView) this.vw_detail.findViewById(R.id.text_title_detail);
+		tvDesc = (TextView) this.vw_detail.findViewById(R.id.text_desc_detail);
+		tvTime = (TextView) this.vw_detail.findViewById(R.id.text_time_detail);
+		tvDate = (TextView) this.vw_detail.findViewById(R.id.text_date_detail);
+//		ivDetailPicture = (ParseImageView) this.vw_detail.findViewById(R.id.imageView1);
+//		ivRowPicture = (ParseImageView) this.vw_master.findViewById(R.id.imageView);
 
 		btnBack = (ImageButton) this.vw_detail.findViewById(R.id.btn_back);
 		btnCreate = (ImageButton) this.vw_master.findViewById(R.id.btn_create);
@@ -116,10 +118,10 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 		eventQueryAdapter.loadObjects();
 
 		// create animation adapter
-		SwingBottomInAnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
-				eventQueryAdapter);
-		animAdapter.setAbsListView(listView);
-		listView.setAdapter(animAdapter);
+		//SwingBottomInAnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
+		//		eventQueryAdapter);
+		//animAdapter.setAbsListView(listView);
+		listView.setAdapter(eventQueryAdapter);
 		listView.setOnItemClickListener(this);
 		listView.setOnItemLongClickListener(this);
 
@@ -128,6 +130,13 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 		Utils.setFontAllView(theLayout);
 		return theLayout;
 
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+				
+		super.onResume();
 	}
 
 	private void initAnimation() {
@@ -151,13 +160,19 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 		if (adp != null && adp.getAdapter() instanceof EventQueryAdapter) {
 			EventQueryAdapter newsAdp = (EventQueryAdapter) adp.getAdapter();
 			Event itm = newsAdp.getItem(position);
+			
+//			Drawable drawable = ivRowPicture.getDrawable();
+//			Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
 
 			tvTitle.setText(itm.getTitle());
 			tvDesc.setText(itm.getDesc());
 			tvTime.setText(itm.getTime());
-			// Bitmap bmp = Utils.GetImageFromAssets(getActivity(), "images/"
-			// + itm.get_image());
-			// img.setImageBitmap(bmp);
+			tvDate.setText(itm.getDate());
+			
+
+//			ivDetailPicture.setImageBitmap(bitmap);
+			
+
 		}
 
 	}

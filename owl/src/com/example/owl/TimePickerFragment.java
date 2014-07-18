@@ -34,11 +34,13 @@ public class TimePickerFragment extends DialogFragment implements
             if (hourOfDay == 12) {
                 time = String.format(("12") + ":" + convertMinute(minute) + "PM");
                 Button b = (Button) getActivity().findViewById(R.id.btn_time);
+                b.setTextColor(getResources().getColor(R.color.gray_35));
                 b.setText(time);
 
             } else {
                 time = String.format((hourOfDay - 12) + ":" + convertMinute(minute) + "PM");
                 Button b = (Button) getActivity().findViewById(R.id.btn_time);
+                b.setTextColor(getResources().getColor(R.color.gray_35));
                 b.setText(time);
             }
         } else {
@@ -49,6 +51,7 @@ public class TimePickerFragment extends DialogFragment implements
             } else {
                 time = String.format((hourOfDay) + ":" + convertMinute(minute) + "AM");
                 Button b = (Button) getActivity().findViewById(R.id.btn_time);
+                b.setTextColor(getResources().getColor(R.color.gray_35));
                 b.setText(time);
             }
         }

@@ -1,10 +1,15 @@
 package com.example.owl;
 
+import java.io.ByteArrayOutputStream;
+
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
@@ -17,6 +22,8 @@ import android.widget.ImageButton;
 import com.example.owl.model.Event;
 import com.parse.ParseACL;
 import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseImageView;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -29,11 +36,13 @@ public class CreateEventActivity extends FragmentActivity implements
 	private Dialog progressDialog;
 
 	private static int RESULT_LOAD_IMAGE = 2;
+	private static int REQUEST_CODE = 999;
 
 	EditText etDesc;
 	EditText etTitle;
 	Button btTime;
 	Button btDate;
+	ParseImageView ivCreate;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +53,13 @@ public class CreateEventActivity extends FragmentActivity implements
 		btnBack = (ImageButton) findViewById(R.id.btn_back1);
 		btnBack.setOnClickListener(this);
 
-		btnCreatePic = (ImageButton) findViewById(R.id.btn_create_pic);
-		btnCreatePic.setOnClickListener(this);
+		// btnCreatePic = (ImageButton) findViewById(R.id.btn_create_pic);
+		// btnCreatePic.setOnClickListener(this);
 
 		btnConfirm = (ImageButton) findViewById(R.id.btn_confirm);
 		btnConfirm.setOnClickListener(this);
+
+		ivCreate = (ParseImageView) findViewById(R.id.createImageView);
 
 		// edit text
 		etDesc = (EditText) findViewById(R.id.editTextDesc);
@@ -74,16 +85,6 @@ public class CreateEventActivity extends FragmentActivity implements
 			finish();
 			break;
 
-		case (R.id.btn_create_pic):
-
-			Intent intent = new Intent();
-			intent.setType("image/*");
-			intent.setAction(Intent.ACTION_GET_CONTENT);
-			startActivityForResult(
-					Intent.createChooser(intent, "Select Picture"),
-					RESULT_LOAD_IMAGE);
-			break;
-
 		case (R.id.btn_confirm):
 			String title;
 			String desc;
@@ -95,36 +96,78 @@ public class CreateEventActivity extends FragmentActivity implements
 			time = btTime.getText().toString();
 			date = btDate.getText().toString();
 
-			// define event object
-			Event newEvent = new Event();
-			newEvent.setTitle(title);
-			newEvent.setDesc(desc);
-			newEvent.setTime(time);
-			newEvent.setDate(date);
-			newEvent.setUser(ParseUser.getCurrentUser());
+			// getting image
+			Drawable drawable = ivCreate.getDrawable();
+			Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 
-			// create access control list, and set object to read-only
-			ParseACL acl = new ParseACL();
-			acl.setPublicReadAccess(true);
-			newEvent.setACL(acl);
+			byte[] data = stream.toByteArray();
+			ParseFile photo = new ParseFile("eventPhoto", data);
 
-			CreateEventActivity.this.progressDialog = ProgressDialog.show(
-					CreateEventActivity.this, "", "Roasting Marshmallows...",
-					true);
+			try {
+				if (title.isEmpty() || desc.isEmpty() || time.equals("Time")
+						|| time.equals("Set Time") || date.equals("Date")
+						|| date.equals("Set Date")) {
 
-			// publish to ParseDB
-			newEvent.saveInBackground(new SaveCallback() {
-				@Override
-				public void done(ParseException e) {
-					// Update the display
-					showPrimaryActivity();
-					progressDialog.dismiss();
+					if (title.isEmpty()) {
+						etTitle.setHintTextColor(getResources().getColor(
+								R.color.red));
+						etTitle.setHint("Enter Title");
+					}
+					if (desc.isEmpty()) {
+						etDesc.setHintTextColor(getResources().getColor(
+								R.color.red));
+						etDesc.setHint("Enter Description");
+					}
+					if (time.equals("Time") || time.equals("Set Time")) {
+						btTime.setTextColor(getResources()
+								.getColor(R.color.red));
+						btTime.setText("Set Time");
+					}
+					if (date.equals("Date") || date.equals("Set Date")) {
+						btDate.setTextColor(getResources()
+								.getColor(R.color.red));
+						btDate.setText("Set Date");
+					}
+
 				}
-			});
+			} finally {
+				if (!title.isEmpty() && !desc.isEmpty() && !time.equals("Time")
+						&& !time.equals("Set Time") && !date.equals("Date")
+						&& !date.equals("Set Date")) {
 
-			// Log.e("Title", etTitle.getText().toString());
-			// Log.e("Desc", etDesc.getText().toString());
-			// Log.e("Time", etTime.getText().toString());
+					// define event object
+					Event newEvent = new Event();
+					newEvent.setTitle(title);
+					newEvent.setDesc(desc);
+					newEvent.setTime(time);
+					newEvent.setDate(date);
+					newEvent.setPhotoFile(photo);
+					newEvent.setUser(ParseUser.getCurrentUser());
+
+					// create access control list, and set object to read-only
+					ParseACL acl = new ParseACL();
+					acl.setPublicReadAccess(true);
+					newEvent.setACL(acl);
+
+					CreateEventActivity.this.progressDialog = ProgressDialog
+							.show(CreateEventActivity.this, "",
+									"Roasting Marshmallows...", true);
+
+					// publish to ParseDB
+					newEvent.saveInBackground(new SaveCallback() {
+						@Override
+						public void done(ParseException e) {
+							// Update the display
+							showPrimaryActivity();
+							progressDialog.dismiss();
+						}
+					});
+
+				}
+			}
+
 			break;
 		}
 	}
@@ -137,6 +180,11 @@ public class CreateEventActivity extends FragmentActivity implements
 	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();
 		newFragment.show(getFragmentManager(), "datePicker");
+	}
+
+	public void showPicturePickerDialog(View v) {
+		DialogFragment newFragment = new PicturePickerFragment();
+		newFragment.show(getFragmentManager(), "picturePicker");
 	}
 
 	private void showPrimaryActivity() {

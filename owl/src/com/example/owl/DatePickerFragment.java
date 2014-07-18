@@ -29,6 +29,7 @@ public class DatePickerFragment extends DialogFragment implements
         month++;
         String dateString = month + "/" + day + "/" + year;
         Button b = (Button) getActivity().findViewById(R.id.btn_date);
+        b.setTextColor(getResources().getColor(R.color.gray_35));
         b.setText(dateString);
     }
 }
