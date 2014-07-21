@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.owl"
+    package="com.owl.main"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -14,22 +14,22 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
     <permission
-        android:name="com.example.owl.permission.C2D_MESSAGE"
+        android:name="com.owl.main.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.example.owl.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.owl.main.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
     <application
-        android:name="com.example.owl.InitializeApplication"
+        android:name="com.owl.main.InitializeApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name="com.example.owl.MainActivity"
+            android:name="com.owl.main.MainActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:windowSoftInputMode="adjustPan" >
@@ -40,25 +40,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.owl.NaviActivity"
+            android:name="com.owl.main.NaviActivity"
             android:label="@string/title_activity_navi" >
         </activity>
         <activity
-            android:name="com.example.owl.CreateEventActivity"
+            android:name="com.owl.main.CreateEventActivity"
             android:label="@string/title_activity_create_event"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.example.owl.TimePickerFragment"
+            android:name="com.owl.main.TimePickerFragment"
             android:label="@string/title_activity_time_picker_fragment" >
         </activity>
         <activity
-            android:name="com.example.owl.DatePickerFragment"
+            android:name="com.owl.main.DatePickerFragment"
             android:label="@string/title_activity_date_picker_fragment" >
         </activity>
         <activity
-            android:name="com.example.owl.SignUpActivity"
+            android:name="com.owl.main.SignUpActivity"
             android:label="title_activity_signup"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         </activity>
@@ -72,7 +72,7 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.owl.UserActivity"
+            android:name="com.owl.main.UserActivity"
             android:label="@string/title_activity_user" >
         </activity>
     </application>
