@@ -40,7 +40,7 @@ public class EventQueryAdapter extends ParseQueryAdapter<Event> {
 		
 		
 		 // Add and download the image
-		  ParseImageView todoImage = (ParseImageView) v.findViewById(R.id.imageView);
+		  ParseImageView todoImage = (ParseImageView) v.findViewById(R.id.imageViewRow);
 		  ParseFile imageFile = event.getParseFile("photo");
 		  if (imageFile != null) {
 		    todoImage.setParseFile(imageFile);

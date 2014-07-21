@@ -16,7 +16,7 @@
         android:padding="@dimen/dim_10" >
 
         <com.parse.ParseImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageViewRow"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginRight="10dp"

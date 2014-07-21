@@ -54,7 +54,7 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 
 	// detail view
 	TextView tvTitle, tvTitle1, tvPrice, tvDesc, tvTime, tvDate;
-	ParseImageView ivDetailPicture, ivRowPicture;
+	ParseImageView ivDetailPicture;
 	ImageButton btnBack, btnCreate;
 
 	// animation
@@ -97,12 +97,13 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 		listView = (ListView) this.vw_master.findViewById(R.id.lst_videos);
 
 		// get detail controls
-		tvTitle = (TextView) this.vw_detail.findViewById(R.id.text_title_detail);
+		tvTitle = (TextView) this.vw_detail
+				.findViewById(R.id.text_title_detail);
 		tvDesc = (TextView) this.vw_detail.findViewById(R.id.text_desc_detail);
 		tvTime = (TextView) this.vw_detail.findViewById(R.id.text_time_detail);
 		tvDate = (TextView) this.vw_detail.findViewById(R.id.text_date_detail);
-//		ivDetailPicture = (ParseImageView) this.vw_detail.findViewById(R.id.imageView1);
-//		ivRowPicture = (ParseImageView) this.vw_master.findViewById(R.id.imageView);
+		ivDetailPicture = (ParseImageView) this.vw_detail
+				.findViewById(R.id.imageViewDetail);
 
 		btnBack = (ImageButton) this.vw_detail.findViewById(R.id.btn_back);
 		btnCreate = (ImageButton) this.vw_master.findViewById(R.id.btn_create);
@@ -118,9 +119,10 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 		eventQueryAdapter.loadObjects();
 
 		// create animation adapter
-		//SwingBottomInAnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
-		//		eventQueryAdapter);
-		//animAdapter.setAbsListView(listView);
+		// SwingBottomInAnimationAdapter animAdapter = new
+		// SwingBottomInAnimationAdapter(
+		// eventQueryAdapter);
+		// animAdapter.setAbsListView(listView);
 		listView.setAdapter(eventQueryAdapter);
 		listView.setOnItemClickListener(this);
 		listView.setOnItemLongClickListener(this);
@@ -131,11 +133,11 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 		return theLayout;
 
 	}
-	
+
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
-				
+
 		super.onResume();
 	}
 
@@ -160,18 +162,19 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 		if (adp != null && adp.getAdapter() instanceof EventQueryAdapter) {
 			EventQueryAdapter newsAdp = (EventQueryAdapter) adp.getAdapter();
 			Event itm = newsAdp.getItem(position);
-			
-//			Drawable drawable = ivRowPicture.getDrawable();
-//			Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+
+			ParseFile imageFile = itm.getParseFile("photo");
+			if (imageFile != null) {
+				ivDetailPicture.setParseFile(imageFile);
+				ivDetailPicture.loadInBackground();
+			}
 
 			tvTitle.setText(itm.getTitle());
 			tvDesc.setText(itm.getDesc());
 			tvTime.setText(itm.getTime());
 			tvDate.setText(itm.getDate());
-			
 
-//			ivDetailPicture.setImageBitmap(bitmap);
-			
+			// ivDetailPicture.setImageURI(itm.getPhotoFile());
 
 		}
 

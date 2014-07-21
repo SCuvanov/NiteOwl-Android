@@ -489,9 +489,9 @@ containing a value of this type.
         public static final int whitebackgroundrepeat=0x7f0200c9;
     }
     public static final class id {
-        public static final int action_settings=0x7f050061;
-        public static final int btnImg_Back=0x7f05005c;
-        public static final int btnImg_Like=0x7f05005d;
+        public static final int action_settings=0x7f050062;
+        public static final int btnImg_Back=0x7f05005d;
+        public static final int btnImg_Like=0x7f05005e;
         public static final int btn_back=0x7f05000d;
         public static final int btn_back1=0x7f050003;
         public static final int btn_back2=0x7f05001b;
@@ -534,7 +534,7 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_logo_image=0x7f050047;
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f050048;
         public static final int createImageView=0x7f050006;
-        public static final int custom_font=0x7f050060;
+        public static final int custom_font=0x7f050061;
         public static final int detail=0x7f050019;
         public static final int editTextDesc=0x7f050008;
         public static final int editTextDescription=0x7f05004d;
@@ -545,11 +545,12 @@ containing a value of this type.
         public static final int editTextSignInUsername=0x7f050013;
         public static final int editTextTitle=0x7f050007;
         public static final int editTextUsername=0x7f05001d;
-        public static final int icon=0x7f05005e;
+        public static final int icon=0x7f05005f;
         public static final int image=0x7f05000f;
-        public static final int imageView=0x7f05004f;
         public static final int imageView1=0x7f050004;
         public static final int imageView123=0x7f050055;
+        public static final int imageViewDetail=0x7f05004f;
+        public static final int imageViewRow=0x7f050058;
         public static final int large=0x7f050002;
         public static final int layout_root=0x7f05004a;
         public static final int link_facebook_button=0x7f05002f;
@@ -572,19 +573,19 @@ containing a value of this type.
         public static final int textView123=0x7f050056;
         public static final int textViewForgotPassword=0x7f050017;
         public static final int text_date_detail=0x7f050050;
-        public static final int text_date_row=0x7f05005a;
+        public static final int text_date_row=0x7f05005b;
         public static final int text_desc=0x7f050012;
         public static final int text_desc_detail=0x7f050053;
-        public static final int text_desc_row=0x7f050059;
+        public static final int text_desc_row=0x7f05005a;
         public static final int text_host_detail=0x7f050052;
         public static final int text_name=0x7f050010;
-        public static final int text_name_row=0x7f050058;
+        public static final int text_name_row=0x7f050059;
         public static final int text_price=0x7f050057;
         public static final int text_time=0x7f050011;
         public static final int text_time_detail=0x7f050051;
-        public static final int text_time_row=0x7f05005b;
+        public static final int text_time_row=0x7f05005c;
         public static final int text_title_detail=0x7f05004e;
-        public static final int title=0x7f05005f;
+        public static final int title=0x7f050060;
         public static final int userProfilePicture=0x7f05002a;
         public static final int view_layer1=0x7f050029;
         public static final int view_layer2=0x7f050028;
