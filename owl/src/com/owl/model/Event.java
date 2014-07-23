@@ -9,9 +9,9 @@ import com.parse.ParseUser;
 @ParseClassName("Event")
 public class Event extends ParseObject {
 	// methods to interface with an Event Object stored in Parse DB
-	
-	public Event(){
-		
+
+	public Event() {
+
 	}
 
 	public String getTitle() {
@@ -55,12 +55,12 @@ public class Event extends ParseObject {
 	}
 
 	public ParseFile getPhotoFile() {
-        return getParseFile("photo");
-    }
- 
-    public void setPhotoFile(ParseFile file) {
-        put("photo", file);
-    }
+		return getParseFile("photo");
+	}
+
+	public void setPhotoFile(ParseFile file) {
+		put("photo", file);
+	}
 
 	public static ParseQuery<Event> getQuery() {
 		return ParseQuery.getQuery(Event.class);

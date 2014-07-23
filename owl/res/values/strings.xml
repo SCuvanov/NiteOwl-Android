@@ -19,6 +19,9 @@
     <string name="txt_title">Title</string>
     <string name="txt_description">Description</string>
     <string name="txt_username">Username</string>
+    <string name="txt_displayname">Display Name</string>
+    <string name="txt_tagline">Tag-Line</string>
+    <string name="txt_bio">Bio</string>
     <string name="txt_signup_header">Sign Up</string>
     <string name="txt_some_header">Something Special</string>
     <string name="txt_or">Or Use</string>
@@ -48,6 +51,7 @@
     <string name="title_activity_intro_fragment">IntroFragment</string>
     <string name="title_activity_user_fragment">UserFragment</string>
     <string name="title_activity_feed_fragment">FeedFragment</string>
+    <string name="title_activity_editprofile">EditProfileActivity</string>
     <string name="txt_menu_swipe">Swipe Example</string>
     <string name="txt_menu_masterdetail">Master Detail</string>
     <string name="txt_menu_CheckList">Check List</string>

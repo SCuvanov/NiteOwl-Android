@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/lightgreybackgroundrepeat"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/ab_height"
+        android:background="@drawable/selectable_background_actionbar" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ImageButton
+                android:id="@+id/btn_backEP"
+                android:layout_width="@dimen/width"
+                android:layout_height="fill_parent"
+                android:background="@drawable/selectable_background_actionbar"
+                android:contentDescription="@string/desc"
+                android:src="@drawable/ico_left" />
+
+            <LinearLayout
+                android:layout_width="@dimen/dim_1"
+                android:layout_height="fill_parent"
+                android:background="@color/gray_35" >
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/userbanner" />
+
+            <LinearLayout
+                android:layout_width="@dimen/dim_1"
+                android:layout_height="fill_parent"
+                android:background="@color/gray_35" >
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btn_confirmEP"
+                android:layout_width="@dimen/width"
+                android:layout_height="fill_parent"
+                android:background="@drawable/selectable_background_actionbar"
+                android:contentDescription="@string/desc"
+                android:src="@drawable/ico_check" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dim_1"
+        android:background="@color/gray_35" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_background_simple"
+            android:orientation="vertical"
+            android:padding="5dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/imageViewDisplayName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/ico_display_name" />
+
+                <EditText
+                    android:id="@+id/editTextDisplayName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/edit_text_holo_light"
+                    android:ems="10"
+                    android:hint="@string/txt_displayname"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/imageViewBio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/ico_bio" />
+
+                <EditText
+                    android:id="@+id/editTextBio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/edit_text_holo_light"
+                    android:ems="10"
+                    android:hint="@string/txt_bio"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/imageViewTagLine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/ico_tagline" />
+
+                <EditText
+                    android:id="@+id/editTextTagLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/edit_text_holo_light"
+                    android:ems="10"
+                    android:hint="@string/txt_tagline"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/btn_change_picture"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dim_50"
+                android:background="@drawable/ui_button_purple"
+                android:gravity="center"
+                android:text="Change Profile Picture"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/link_facebook_button"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dim_50"
+                android:background="@drawable/ui_button_facebook"
+                android:gravity="center"
+                android:text="Link Facebook"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

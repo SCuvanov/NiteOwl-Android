@@ -20,8 +20,8 @@ public class EventQueryAdapter extends ParseQueryAdapter<Event> {
 		// Todos marked as high-pri
 
 		super(context, new ParseQueryAdapter.QueryFactory<Event>() {
-			public ParseQuery create() {
-				ParseQuery query = new ParseQuery("Event");
+			public ParseQuery<Event> create() {
+				ParseQuery<Event> query = new ParseQuery<Event>("Event");
 				query.whereEqualTo("user", ParseUser.getCurrentUser());
 				query.orderByDescending("createdAt");
 				return query;

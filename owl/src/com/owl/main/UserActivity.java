@@ -34,11 +34,8 @@ public class UserActivity extends Fragment implements OnClickListener,
 
 	Context context;
 	private ProfilePictureView userProfilePictureView;
-	private TextView userNameView;
-	private TextView userLocationView;
-	private TextView userGenderView;
-	private TextView userDateOfBirthView;
-	private TextView userRelationshipView;
+	private TextView tvUserName, tvBio, tvTagLine;
+
 	private static final String TAG = "OwlSample";
 
 	@Override
@@ -72,17 +69,18 @@ public class UserActivity extends Fragment implements OnClickListener,
 		Button logoutButton = (Button) mLayout
 				.findViewById(R.id.log_out_button);
 		logoutButton.setOnClickListener(this);
-		
-		Button linkFacebookButton = (Button) mLayout
-				.findViewById(R.id.link_facebook_button);
-		linkFacebookButton.setOnClickListener(this);
-		
 
-		userNameView = (TextView) mLayout.findViewById(R.id.text_name);
-		 userProfilePictureView = (ProfilePictureView)
-		 mLayout.findViewById(R.id.userProfilePicture);
-		 
+		Button editProfileButton = (Button) mLayout
+				.findViewById(R.id.btn_editProfile);
+		editProfileButton.setOnClickListener(this);
 
+		tvUserName = (TextView) mLayout.findViewById(R.id.text_name);
+		tvBio = (TextView) mLayout.findViewById(R.id.text_bio);
+		tvTagLine = (TextView) mLayout.findViewById(R.id.text_tagline);
+		userProfilePictureView = (ProfilePictureView) mLayout
+				.findViewById(R.id.userProfilePicture);
+
+		updateViewsWithProfileInfo();
 		return mLayout;
 	}
 
@@ -117,24 +115,14 @@ public class UserActivity extends Fragment implements OnClickListener,
 			Log.e(TAG, "Tapped sign out");
 			onLogoutButtonClicked();
 			break;
-			
-		case R.id.link_facebook_button:
-			Log.e(TAG, "Tapped link facebook");
-			
-			final ParseUser currentUser = ParseUser.getCurrentUser(); 
-			
-			if (!ParseFacebookUtils.isLinked(currentUser)) {
-				  ParseFacebookUtils.link(currentUser, getActivity(), new SaveCallback() {
-				    @Override
-				    public void done(ParseException ex) {
-				      if (ParseFacebookUtils.isLinked(currentUser)) {
-				        Log.d("MyApp", "Woohoo, user logged in with Facebook!");
-				        makeMeRequest();
-				      }
-				    }
-				  });
-				}
-			
+
+		case R.id.btn_editProfile:
+			Log.e(TAG, "Tapped editProfile button");
+
+			Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivity(intent);
+			break;
 
 		}
 
@@ -144,7 +132,7 @@ public class UserActivity extends Fragment implements OnClickListener,
 		Intent intent = new Intent(getActivity(), MainActivity.class);
 		startActivity(intent);
 	}
-	
+
 	private void onLogoutButtonClicked() {
 		// Log the user out
 		ParseUser.logOut();
@@ -166,10 +154,11 @@ public class UserActivity extends Fragment implements OnClickListener,
 								// Populate the JSON object
 								userProfile.put("facebookId", user.getId());
 								userProfile.put("name", user.getName());
-//								if (user.getLocation().getProperty("name") != null) {
-//									userProfile.put("location", (String) user
-//											.getLocation().getProperty("name"));
-//								}
+								// if (user.getLocation().getProperty("name") !=
+								// null) {
+								// userProfile.put("location", (String) user
+								// .getLocation().getProperty("name"));
+								// }
 								// Save the user profile info in a user property
 								ParseUser currentUser = ParseUser
 										.getCurrentUser();
@@ -178,7 +167,7 @@ public class UserActivity extends Fragment implements OnClickListener,
 
 								// Show the user info
 								updateViewsWithProfileInfo();
-								
+
 							} catch (JSONException e) {
 								Log.d(InitializeApplication.TAG,
 										"Error parsing returned user data.");
@@ -206,6 +195,25 @@ public class UserActivity extends Fragment implements OnClickListener,
 
 	private void updateViewsWithProfileInfo() {
 		ParseUser currentUser = ParseUser.getCurrentUser();
+
+		if (currentUser.getString("displayName") != null ) {
+			tvUserName.setText(currentUser.getString("displayName"));
+		} else {
+			tvUserName.setText("");
+		}
+		
+		if (currentUser.getString("bio") != null ) {
+			tvBio.setText(currentUser.getString("bio"));
+		} else {
+			tvBio.setText("");
+		}
+		
+		if (currentUser.getString("tagline") != null ) {
+			tvTagLine.setText(currentUser.getString("tagline"));
+		} else {
+			tvTagLine.setText("");
+		}
+
 		if (currentUser.get("profile") != null) {
 			JSONObject userProfile = currentUser.getJSONObject("profile");
 			try {
@@ -217,11 +225,7 @@ public class UserActivity extends Fragment implements OnClickListener,
 					// Show the default, blank user profile picture
 					userProfilePictureView.setProfileId(null);
 				}
-				if (userProfile.getString("name") != null) {
-					userNameView.setText(userProfile.getString("name"));
-				} else {
-					userNameView.setText("");
-				}
+
 			} catch (JSONException e) {
 				// handle error
 			}

@@ -171,8 +171,6 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 			tvTime.setText(itm.getTime());
 			tvDate.setText(itm.getDate());
 
-			// ivDetailPicture.setImageURI(itm.getPhotoFile());
-
 		}
 
 	}
@@ -269,24 +267,6 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 			break;
 
 		}
-	}
-
-	private void doEventQuery() {
-		ParseUser user = ParseUser.getCurrentUser();
-
-		ParseQuery<Event> query = ParseQuery.getQuery("Event");
-		query.whereEqualTo("user", user);
-		query.findInBackground(new FindCallback<Event>() {
-			public void done(List<Event> eventList, ParseException e) {
-				if (e == null) {
-					Log.e("Event", "Retrieved " + eventList.size() + " Events");
-					List<Event> nEventList = eventList;
-
-				} else {
-					Log.e("Event", "Error: " + e.getMessage());
-				}
-			}
-		});
 	}
 
 }

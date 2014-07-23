@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="13"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -74,6 +74,11 @@
         <activity
             android:name="com.owl.main.UserActivity"
             android:label="@string/title_activity_user" >
+        </activity>
+        <activity
+            android:name="com.owl.main.EditProfileActivity"
+            android:label="@string/title_activity_editprofile"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         </activity>
     </application>
 
