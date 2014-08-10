@@ -149,6 +149,7 @@ public class CreateEventActivity extends FragmentActivity implements
 					// create access control list, and set object to read-only
 					ParseACL acl = new ParseACL();
 					acl.setPublicReadAccess(true);
+				    acl.setPublicWriteAccess(true); //objects created are writable
 					newEvent.setACL(acl);
 
 					CreateEventActivity.this.progressDialog = ProgressDialog

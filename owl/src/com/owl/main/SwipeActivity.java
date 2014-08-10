@@ -26,13 +26,10 @@ import android.widget.TextView;
 import com.owl.adapter.EventQueryAdapter;
 import com.owl.model.Event;
 import com.owl.utils.Utils;
-import com.parse.FindCallback;
-import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseImageView;
-import com.parse.ParseQuery;
+import com.parse.ParseObject;
 import com.parse.ParseQueryAdapter;
-import com.parse.ParseUser;
 
 public class SwipeActivity extends Fragment implements OnClickListener,
 		OnItemClickListener, OnItemLongClickListener {
@@ -50,7 +47,7 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 	View vw_detail;
 
 	// detail view
-	TextView tvTitle, tvTitle1, tvPrice, tvDesc, tvTime, tvDate;
+	TextView tvTitle, tvTitle1, tvPrice, tvDesc, tvTime, tvDate, tvHost;
 	ParseImageView ivDetailPicture;
 	ImageButton btnBack, btnCreate;
 
@@ -115,6 +112,7 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 		eventQueryAdapter = new EventQueryAdapter(getActivity());
 		eventQueryAdapter.loadObjects();
 
+
 		// create animation adapter
 		// SwingBottomInAnimationAdapter animAdapter = new
 		// SwingBottomInAnimationAdapter(
@@ -177,7 +175,7 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view,
-			int position, long id) {
+			final int position, long id) {
 		// TODO Auto-generated method stub
 
 		LayoutInflater li = LayoutInflater.from(getActivity());
@@ -190,6 +188,13 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 		builder1.setPositiveButton("Yes",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
+						// remove event from list, and delete from database
+
+						ParseObject currentEvent = eventQueryAdapter
+								.getItem(position);
+
+						currentEvent.deleteInBackground();
+						eventQueryAdapter.notifyDataSetChanged();
 						dialog.cancel();
 					}
 				});
@@ -204,17 +209,15 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 
 		Button nButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
 		if (nButton != null) {
-			nButton.setBackground(getResources().getDrawable(
-					R.drawable.white_background_selector));
 			nButton.setTextSize(20);
+			nButton.setBackgroundResource(R.drawable.ui_button_white);
 			nButton.setTextColor(getResources().getColor(R.color.red));
 		}
 
 		Button pButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
 		if (pButton != null) {
-			pButton.setBackground(getResources().getDrawable(
-					R.drawable.white_background_selector));
 			pButton.setTextSize(20);
+			pButton.setBackgroundResource(R.drawable.ui_button_white);
 			pButton.setTextColor(getResources().getColor(R.color.green));
 		}
 

@@ -9,7 +9,7 @@
         android:id="@+id/view_layer1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="3dp"
         android:background="@drawable/white_background_selector"
         android:gravity="center_vertical"
         android:orientation="horizontal"

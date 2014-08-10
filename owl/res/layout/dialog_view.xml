@@ -3,7 +3,7 @@
     android:id="@+id/layout_root"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/smallpurplebackgroundrepeat"
+    android:background="@color/white"
     android:orientation="vertical"
     android:padding="10dp" >
 
@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Leave this event?"
-        android:textColor="@color/white"
+        android:textColor="@color/purple"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </LinearLayout>

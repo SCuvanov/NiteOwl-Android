@@ -148,7 +148,6 @@
                         <LinearLayout
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:orientation="horizontal" >
 
                             <TextView
@@ -160,7 +159,7 @@
                                 android:gravity="left"
                                 android:text="DATE"
                                 android:textColor="@color/purple"
-                                android:textSize="@dimen/tex_size_xlarge" />
+                                android:textSize="@dimen/tex_size_xxlarge" />
 
                             <TextView
                                 android:id="@+id/text_time_detail"
@@ -171,7 +170,7 @@
                                 android:gravity="right"
                                 android:text="TIME"
                                 android:textColor="@color/purple"
-                                android:textSize="@dimen/tex_size_xlarge" />
+                                android:textSize="@dimen/tex_size_xxlarge" />
                         </LinearLayout>
 
                         <!-- END OF DATE/TIME LAYOUT -->
@@ -179,13 +178,13 @@
 
                         <LinearLayout
                             android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="fill_parent"
                             android:orientation="horizontal" >
 
                             <TextView
-                                android:id="@+id/text_host_detail"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:id="@+id/text_desc_detail"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
                                 android:layout_weight="1"
                                 android:ellipsize="end"
                                 android:gravity="left"
@@ -204,25 +203,6 @@
                 <!-- END PIC/DATE/TIME/HOST PARENT LAYOUT -->
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/white_background_simple"
-                android:orientation="vertical"
-                android:padding="10dp" >
-
-                <TextView
-                    android:id="@+id/text_desc_detail"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ellipsize="end"
-                    android:gravity="left"
-                    android:text="Host:"
-                    android:textColor="@color/gray_35"
-                    android:textSize="@dimen/tex_size_large" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

@@ -1,20 +1,18 @@
 package com.owl.main;
 
-import java.util.Arrays;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -22,6 +20,7 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+import com.parse.RequestPasswordResetCallback;
 
 public class MainActivity extends Activity implements OnClickListener {
 
@@ -29,6 +28,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	EditText etSignInUsername;
 	EditText etSignInPassword;
+	EditText etForgotPassword;
 	TextView tvForgotPassword;
 
 	private Dialog progressDialog;
@@ -81,40 +81,28 @@ public class MainActivity extends Activity implements OnClickListener {
 		ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
 	}
 
-	private void onLoginButtonClicked() {
-		MainActivity.this.progressDialog = ProgressDialog.show(
-				MainActivity.this, "", "Logging in...", true);
-		List<String> permissions = Arrays.asList("public_profile",
-				"user_friends", "email");
-		ParseFacebookUtils.logIn(permissions, this, new LogInCallback() {
-			@Override
-			public void done(ParseUser user, ParseException err) {
-				MainActivity.this.progressDialog.dismiss();
-				if (user == null) {
-					Log.d(InitializeApplication.TAG,
-							"Uh oh. The user cancelled the Facebook login.");
-				} else if (user.isNew()) {
-					Log.d(InitializeApplication.TAG,
-							"User signed up and logged in through Facebook!");
-					showPrimaryActivity();
-				} else {
-					Log.d(InitializeApplication.TAG,
-							"User logged in through Facebook!");
-					showPrimaryActivity();
-				}
-			}
-		});
-	}
-
 	private void showPrimaryActivity() {
 		Intent intent = new Intent(context, NaviActivity.class);
 		startActivity(intent);
 		finish();
 	}
 
-	public void showAlertDialog(View v) {
-		DialogFragment newFragment = new AlertDialogFragment();
-		newFragment.show(getFragmentManager(), "Forgot Password");
+	private void resetPassword(String email) {
+
+		ParseUser.requestPasswordResetInBackground(email,
+				new RequestPasswordResetCallback() {
+					public void done(ParseException e) {
+						if (e == null) {
+							// An email was successfully sent with reset
+							// instructions.
+						} else {
+							// Something went wrong. Look at the ParseException
+							// to see what's up.
+							Log.e("PARSE EXCEPTION:", "PARSE CAUSE:", e.getCause());
+						}
+					}
+				});
+
 	}
 
 	@Override
@@ -188,23 +176,52 @@ public class MainActivity extends Activity implements OnClickListener {
 			Log.e(TAG, "Tapped forgot password");
 			// prompt user with dialog to enter email
 
-			// String forgotPasswordEmail =
-			// etForgotPasswordEmail.getText().toString().trim();
-			//
-			//
-			//
-			// ParseUser.requestPasswordResetInBackground(forgotPasswordEmail,
-			// new RequestPasswordResetCallback() {
-			// public void done(ParseException e) {
-			// if (e == null) {
-			// // An email was successfully sent with reset
-			// // instructions.
-			// } else {
-			// // Something went wrong. Look at the
-			// // ParseException to see what's up.
-			// }
-			// }
-			// });
+			LayoutInflater li = LayoutInflater.from(this);
+			View dialogView = li.inflate(R.layout.forgot_password_dialog_view,
+					null);
+			
+			etForgotPassword = (EditText) dialogView.findViewById(R.id.editTextForgotPassword);
+
+			AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+			builder1.setView(dialogView);
+
+			builder1.setCancelable(true);
+			builder1.setPositiveButton("Yes",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+
+							String forgotPasswordEmail = etForgotPassword
+									.getText().toString().trim();
+							resetPassword(forgotPasswordEmail);
+							
+
+						}
+					});
+			builder1.setNegativeButton("No",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							dialog.cancel();
+						}
+					});
+
+			AlertDialog alertDialog = builder1.create();
+			alertDialog.show();
+
+			Button nButton = alertDialog
+					.getButton(DialogInterface.BUTTON_NEGATIVE);
+			if (nButton != null) {
+				nButton.setTextSize(20);
+				nButton.setBackgroundResource(R.drawable.ui_button_white);
+				nButton.setTextColor(getResources().getColor(R.color.gray_35));
+			}
+
+			Button pButton = alertDialog
+					.getButton(DialogInterface.BUTTON_POSITIVE);
+			if (pButton != null) {
+				pButton.setTextSize(20);
+				pButton.setBackgroundResource(R.drawable.ui_button_white);
+				pButton.setTextColor(getResources().getColor(R.color.gray_35));
+			}
 
 			break;
 
