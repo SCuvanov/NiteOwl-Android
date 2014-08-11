@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="@dimen/ab_height"
-        android:background="@drawable/selectable_background_actionbar" >
+        android:background="@color/gray_35" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -23,20 +23,34 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
-                android:paddingLeft="10dp"
+                android:layout_marginLeft="10dp"
                 android:singleLine="true"
                 android:tag="bold"
                 android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/tex_size_xxxlarge"
                 android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="@dimen/dim_1"
+                android:layout_height="fill_parent"
+                android:background="@color/purple" >
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btn_friends"
+                android:layout_width="@dimen/width"
+                android:layout_height="fill_parent"
+                android:background="@color/gray_35"
+                android:contentDescription="@string/desc"
+                android:src="@drawable/ico_friends_white" />
         </LinearLayout>
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="@dimen/dim_1"
-        android:background="@color/gray_35" >
+        android:background="@color/purple" >
     </LinearLayout>
 
     <LinearLayout
@@ -117,7 +131,7 @@
                             android:layout_height="fill_parent"
                             android:layout_marginTop="2dp"
                             android:ellipsize="end"
-                            android:lines="5"
+                            android:lines="3"
                             android:text="DESCRIPTION"
                             android:textColor="@color/gray_79"
                             android:textSize="@dimen/tex_size_small" />

@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="@dimen/ab_height"
-        android:background="@drawable/selectable_background_actionbar" >
+        android:background="@color/gray_35" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -18,14 +18,14 @@
                 android:id="@+id/btn_back"
                 android:layout_width="@dimen/width"
                 android:layout_height="fill_parent"
-                android:background="@drawable/selectable_background_actionbar"
+                android:background="@color/gray_35"
                 android:contentDescription="@string/desc"
                 android:src="@drawable/ico_left" />
 
             <LinearLayout
                 android:layout_width="@dimen/dim_1"
                 android:layout_height="fill_parent"
-                android:background="@color/gray_35" >
+                android:background="@color/purple" >
             </LinearLayout>
 
             <ImageView
@@ -38,14 +38,14 @@
             <LinearLayout
                 android:layout_width="@dimen/dim_1"
                 android:layout_height="fill_parent"
-                android:background="@color/gray_35" >
+                android:background="@color/purple" >
             </LinearLayout>
 
             <ImageButton
                 android:id="@+id/btn_refresh"
                 android:layout_width="@dimen/width"
                 android:layout_height="fill_parent"
-                android:background="@drawable/selectable_background_actionbar"
+                android:background="@color/gray_35"
                 android:contentDescription="@string/desc"
                 android:src="@drawable/ico_replay" />
         </LinearLayout>
@@ -54,7 +54,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="@dimen/dim_1"
-        android:background="@color/gray_35" >
+        android:background="@color/purple" >
     </LinearLayout>
 
     <ScrollView
@@ -67,6 +67,84 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <!-- START TITLE / PICTURE / TIME / DATE -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_background_simple"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <com.parse.ParseImageView
+                        android:id="@+id/imageViewDetail"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_content_picture_gray" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:padding="5dp" >
+
+                    <TextView
+                        android:id="@+id/text_title_detail"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:gravity="left"
+                        android:lines="2"
+                        android:tag="bold"
+                        android:text="Boss"
+                        android:textColor="@color/purple"
+                        android:textSize="@dimen/tex_size_xxlarge"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/text_date_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableLeft="@drawable/ico_calendar_gray"
+                            android:ellipsize="end"
+                            android:gravity="left|center_vertical"
+                            android:text="DATE"
+                            android:textColor="@color/gray_35"
+                            android:textSize="@dimen/tex_size_xlarge" />
+
+                        <TextView
+                            android:id="@+id/text_time_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawableLeft="@drawable/ico_time_gray"
+                            android:ellipsize="end"
+                            android:gravity="right|fill"
+                            android:text="TIME"
+                            android:textColor="@color/gray_35"
+                            android:textSize="@dimen/tex_size_xlarge" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <!-- END TITLE / PICTURE / DATE / TIME -->
+            <!-- START DESCRIPTION / LOCATION / ETC -->
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -74,135 +152,28 @@
                 android:orientation="vertical"
                 android:padding="10dp" >
 
-                <!-- START TITLE TEXTVIEW LAYOUT -->
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/text_desc_detail_perm"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:text="Details:"
+                    android:textColor="@color/gray_79"
+                    android:textSize="@dimen/tex_size_large" />
 
-                    <TextView
-                        android:id="@+id/text_title_detail"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:tag="bold"
-                        android:text="Boss"
-                        android:textColor="@color/gray_35"
-                        android:textSize="@dimen/tex_size_xxlarge"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/text_desc_detail"
                     android:layout_width="fill_parent"
-                    android:layout_height="@dimen/dim_1"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/gray_189" >
-                </LinearLayout>
-
-                <!-- END TITLE TEXTVIEW LAYOUT -->
-
-
-                <!-- START PIC/DATE/TIME/HOST PARENT LAYOUT -->
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal" >
-
-                    <!-- START OF IMAGE VIEW LAYOUT -->
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
-
-                        <com.parse.ParseImageView
-                            android:id="@+id/imageViewDetail"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:adjustViewBounds="true"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_content_picture_gray" />
-                    </LinearLayout>
-
-                    <!-- END OF IMAGE VIEW LAYOUT -->
-
-
-                    <!-- START OF DATE/TITLE/HOST LAYOUT -->
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_marginLeft="10dp"
-                        android:orientation="vertical" >
-
-                        <!-- START OF DATE/TITLE/HOST LAYOUT -->
-
-
-                        <!-- START OF DATE/TIME LAYOUT -->
-
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal" >
-
-                            <TextView
-                                android:id="@+id/text_date_detail"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:ellipsize="end"
-                                android:gravity="left"
-                                android:text="DATE"
-                                android:textColor="@color/purple"
-                                android:textSize="@dimen/tex_size_xxlarge" />
-
-                            <TextView
-                                android:id="@+id/text_time_detail"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:ellipsize="end"
-                                android:gravity="right"
-                                android:text="TIME"
-                                android:textColor="@color/purple"
-                                android:textSize="@dimen/tex_size_xxlarge" />
-                        </LinearLayout>
-
-                        <!-- END OF DATE/TIME LAYOUT -->
-                        <!-- START OF HOST LAYOUT -->
-
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:orientation="horizontal" >
-
-                            <TextView
-                                android:id="@+id/text_desc_detail"
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:layout_weight="1"
-                                android:ellipsize="end"
-                                android:gravity="left"
-                                android:text="Host:"
-                                android:textColor="@color/gray_35"
-                                android:textSize="@dimen/tex_size_large" />
-                        </LinearLayout>
-                        <!-- END OF HOST LAYOUT -->
-
-                    </LinearLayout>
-
-                    <!-- END OF DATE/TITLE/HOST LAYOUT -->
-
-                </LinearLayout>
-
-                <!-- END PIC/DATE/TIME/HOST PARENT LAYOUT -->
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:text="Host:"
+                    android:textColor="@color/gray_35"
+                    android:textSize="@dimen/tex_size_large" />
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 

@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="@dimen/ab_height"
-        android:background="@drawable/selectable_background_actionbar" >
+        android:background="@color/gray_35" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -17,14 +17,14 @@
                 android:id="@+id/btn_refresh"
                 android:layout_width="@dimen/width"
                 android:layout_height="fill_parent"
-                android:background="@drawable/selectable_background_actionbar"
+                android:background="@color/gray_35"
                 android:contentDescription="@string/desc"
                 android:src="@drawable/ico_replay" />
 
             <LinearLayout
                 android:layout_width="@dimen/dim_1"
                 android:layout_height="fill_parent"
-                android:background="@color/gray_35" >
+                android:background="@color/purple" >
             </LinearLayout>
 
             <ImageView
@@ -37,14 +37,14 @@
             <LinearLayout
                 android:layout_width="@dimen/dim_1"
                 android:layout_height="fill_parent"
-                android:background="@color/gray_35" >
+                android:background="@color/purple" >
             </LinearLayout>
 
             <ImageButton
                 android:id="@+id/btn_create"
                 android:layout_width="@dimen/width"
                 android:layout_height="fill_parent"
-                android:background="@drawable/selectable_background_actionbar"
+                android:background="@color/gray_35"
                 android:contentDescription="@string/desc"
                 android:src="@drawable/ico_plus" />
         </LinearLayout>
@@ -53,7 +53,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="@dimen/dim_1"
-        android:background="@color/gray_35" >
+        android:background="@color/purple" >
     </LinearLayout>
 
     <LinearLayout

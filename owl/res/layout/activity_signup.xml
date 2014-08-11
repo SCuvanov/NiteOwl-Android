@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="@dimen/ab_height"
-        android:background="@drawable/selectable_background_actionbar" >
+        android:background="@color/gray_35" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -18,7 +18,7 @@
                 android:id="@+id/btn_back2"
                 android:layout_width="@dimen/width"
                 android:layout_height="fill_parent"
-                android:background="@drawable/selectable_background_actionbar"
+                android:background="@color/gray_35"
                 android:contentDescription="@string/desc"
                 android:src="@drawable/ico_left" />
 
@@ -28,12 +28,19 @@
                 android:background="@color/gray_35" >
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/text_name"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:src="@drawable/signupbanner" />
+                android:ellipsize="end"
+                android:gravity="center"
+                android:singleLine="true"
+                android:tag="bold"
+                android:text="sign up"
+                android:textColor="@color/white"
+                android:textSize="@dimen/tex_size_xxxlarge"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="@dimen/dim_1"
@@ -45,7 +52,7 @@
                 android:id="@+id/btn_confirm2"
                 android:layout_width="@dimen/width"
                 android:layout_height="fill_parent"
-                android:background="@drawable/selectable_background_actionbar"
+                android:background="@color/gray_35"
                 android:contentDescription="@string/desc"
                 android:src="@drawable/ico_check" />
         </LinearLayout>

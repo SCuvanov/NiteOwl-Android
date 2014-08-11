@@ -112,7 +112,6 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 		eventQueryAdapter = new EventQueryAdapter(getActivity());
 		eventQueryAdapter.loadObjects();
 
-
 		// create animation adapter
 		// SwingBottomInAnimationAdapter animAdapter = new
 		// SwingBottomInAnimationAdapter(
@@ -194,6 +193,8 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 								.getItem(position);
 
 						currentEvent.deleteInBackground();
+
+						eventQueryAdapter.loadObjects();
 						eventQueryAdapter.notifyDataSetChanged();
 						dialog.cancel();
 					}

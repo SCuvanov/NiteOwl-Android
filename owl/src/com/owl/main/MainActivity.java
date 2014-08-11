@@ -98,7 +98,8 @@ public class MainActivity extends Activity implements OnClickListener {
 						} else {
 							// Something went wrong. Look at the ParseException
 							// to see what's up.
-							Log.e("PARSE EXCEPTION:", "PARSE CAUSE:", e.getCause());
+							Log.e("PARSE EXCEPTION:", "PARSE CAUSE:",
+									e.getCause());
 						}
 					}
 				});
@@ -179,10 +180,12 @@ public class MainActivity extends Activity implements OnClickListener {
 			LayoutInflater li = LayoutInflater.from(this);
 			View dialogView = li.inflate(R.layout.forgot_password_dialog_view,
 					null);
-			
-			etForgotPassword = (EditText) dialogView.findViewById(R.id.editTextForgotPassword);
 
-			AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+			etForgotPassword = (EditText) dialogView
+					.findViewById(R.id.editTextForgotPassword);
+
+			AlertDialog.Builder builder1 = new AlertDialog.Builder(
+					MainActivity.this);
 			builder1.setView(dialogView);
 
 			builder1.setCancelable(true);
@@ -193,7 +196,6 @@ public class MainActivity extends Activity implements OnClickListener {
 							String forgotPasswordEmail = etForgotPassword
 									.getText().toString().trim();
 							resetPassword(forgotPasswordEmail);
-							
 
 						}
 					});

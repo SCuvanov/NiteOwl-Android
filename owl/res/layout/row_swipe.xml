@@ -45,7 +45,7 @@
                     android:singleLine="true"
                     android:tag="bold"
                     android:text="TITLE"
-                    android:textColor="@color/gray_35"
+                    android:textColor="@color/purple"
                     android:textSize="@dimen/tex_size_normal"
                     android:textStyle="bold" />
 
@@ -73,7 +73,7 @@
                     android:ellipsize="end"
                     android:gravity="left"
                     android:text="DATE"
-                    android:textColor="@color/purple"
+                    android:textColor="@color/gray_35"
                     android:textSize="@dimen/tex_size_small" />
 
                 <TextView
@@ -84,7 +84,7 @@
                     android:ellipsize="end"
                     android:gravity="right"
                     android:text="DATE"
-                    android:textColor="@color/purple"
+                    android:textColor="@color/gray_35"
                     android:textSize="@dimen/tex_size_small" />
             </LinearLayout>
         </LinearLayout>

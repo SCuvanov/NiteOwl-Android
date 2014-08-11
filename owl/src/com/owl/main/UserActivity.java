@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,10 +25,8 @@ import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.ProfilePictureView;
-import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 public class UserActivity extends Fragment implements OnClickListener,
 		OnItemClickListener {
@@ -73,6 +72,13 @@ public class UserActivity extends Fragment implements OnClickListener,
 		Button editProfileButton = (Button) mLayout
 				.findViewById(R.id.btn_editProfile);
 		editProfileButton.setOnClickListener(this);
+		
+		ImageButton btnFindFriends = (ImageButton) mLayout
+				.findViewById(R.id.btn_friends);
+		btnFindFriends.setOnClickListener(this);
+		
+		
+		
 
 		tvUserName = (TextView) mLayout.findViewById(R.id.text_name);
 		tvBio = (TextView) mLayout.findViewById(R.id.text_bio);
@@ -122,6 +128,14 @@ public class UserActivity extends Fragment implements OnClickListener,
 			Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
+			break;
+			
+		case R.id.btn_friends:
+			Log.e(TAG, "Tapped editProfile button");
+
+			Intent intent1 = new Intent(getActivity(), FriendSearchActivity.class);
+			intent1.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivity(intent1);
 			break;
 
 		}
