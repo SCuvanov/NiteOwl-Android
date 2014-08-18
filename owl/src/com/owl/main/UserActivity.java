@@ -72,13 +72,10 @@ public class UserActivity extends Fragment implements OnClickListener,
 		Button editProfileButton = (Button) mLayout
 				.findViewById(R.id.btn_editProfile);
 		editProfileButton.setOnClickListener(this);
-		
+
 		ImageButton btnFindFriends = (ImageButton) mLayout
 				.findViewById(R.id.btn_friends);
 		btnFindFriends.setOnClickListener(this);
-		
-		
-		
 
 		tvUserName = (TextView) mLayout.findViewById(R.id.text_name);
 		tvBio = (TextView) mLayout.findViewById(R.id.text_bio);
@@ -129,11 +126,12 @@ public class UserActivity extends Fragment implements OnClickListener,
 			intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
 			break;
-			
+
 		case R.id.btn_friends:
 			Log.e(TAG, "Tapped editProfile button");
 
-			Intent intent1 = new Intent(getActivity(), FriendSearchActivity.class);
+			Intent intent1 = new Intent(getActivity(),
+					FriendSearchActivity.class);
 			intent1.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent1);
 			break;
@@ -210,19 +208,19 @@ public class UserActivity extends Fragment implements OnClickListener,
 	private void updateViewsWithProfileInfo() {
 		ParseUser currentUser = ParseUser.getCurrentUser();
 
-		if (currentUser.getString("displayName") != null ) {
+		if (currentUser.getString("displayName") != null) {
 			tvUserName.setText(currentUser.getString("displayName"));
 		} else {
 			tvUserName.setText("");
 		}
-		
-		if (currentUser.getString("bio") != null ) {
+
+		if (currentUser.getString("bio") != null) {
 			tvBio.setText(currentUser.getString("bio"));
 		} else {
 			tvBio.setText("");
 		}
-		
-		if (currentUser.getString("tagline") != null ) {
+
+		if (currentUser.getString("tagline") != null) {
 			tvTagLine.setText(currentUser.getString("tagline"));
 		} else {
 			tvTagLine.setText("");
@@ -234,6 +232,7 @@ public class UserActivity extends Fragment implements OnClickListener,
 				if (userProfile.getString("facebookId") != null) {
 					String facebookId = userProfile.get("facebookId")
 							.toString();
+
 					userProfilePictureView.setProfileId(facebookId);
 				} else {
 					// Show the default, blank user profile picture

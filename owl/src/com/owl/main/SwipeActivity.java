@@ -39,7 +39,6 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 
 	List<Event> lstEvents;
 
-	private ParseQueryAdapter<Event> mainAdapter;
 	private EventQueryAdapter eventQueryAdapter;
 
 	View vw_layout;
