@@ -260,7 +260,8 @@ public class SwipeActivity extends Fragment implements OnClickListener,
 		case (R.id.btn_create):
 			Intent intent = new Intent(v.getContext(),
 					CreateEventActivity.class);
-			// intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
 			v.getContext().startActivity(intent);
 
 			break;

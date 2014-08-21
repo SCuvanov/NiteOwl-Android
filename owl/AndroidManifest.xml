@@ -97,6 +97,11 @@
             android:label="@string/title_activity_user_details"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         </activity>
+        <activity
+            android:name=".InviteFriendsActivity"
+            android:label="@string/title_activity_invite_friends"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

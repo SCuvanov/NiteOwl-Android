@@ -27,14 +27,15 @@ public class UserActivity extends Fragment implements OnClickListener {
 
 	Context context;
 	public ParseImageView ivProfilePic;
+
 	private TextView tvUserName, tvBio, tvTagLine;
 
 	private static final String TAG = "OwlSample";
 	private static final int RESULT_OK = 0;
-	private static final int RESULT_LOAD_IMAGE = 888;
+	private static final int RESULT_LOAD_IMAGE = 1;
 
-	final int PHOTO_WIDTH = 500;
-	final int PHOTO_HEIGHT = 500;
+	final int PHOTO_WIDTH = 300;
+	final int PHOTO_HEIGHT = 300;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -123,19 +124,19 @@ public class UserActivity extends Fragment implements OnClickListener {
 
 		case R.id.imageViewUserProfile:
 
-			Intent intent2 = new Intent(
-					Intent.ACTION_PICK,
-					android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+			Intent cropIntent = new Intent();
+			cropIntent.setType("image/*");
+			cropIntent.setAction(Intent.ACTION_PICK);
 
-			intent2.setType("image/*");
-			intent2.putExtra("crop", "true");
-			intent2.putExtra("scale", true);
-			intent2.putExtra("outputX", PHOTO_WIDTH);
-			intent2.putExtra("outputY", PHOTO_HEIGHT);
-			intent2.putExtra("aspectX", 1);
-			intent2.putExtra("aspectY", 1);
-			intent2.putExtra("return-data", true);
-			startActivityForResult(intent2, RESULT_LOAD_IMAGE);
+			cropIntent.putExtra("crop", "true");
+			cropIntent.putExtra("scale", true);
+			cropIntent.putExtra("outputX", PHOTO_WIDTH);
+			cropIntent.putExtra("outputY", PHOTO_HEIGHT);
+			cropIntent.putExtra("aspectX", 1);
+			cropIntent.putExtra("aspectY", 1);
+			cropIntent.putExtra("return-data", true);
+
+			startActivityForResult(cropIntent, RESULT_LOAD_IMAGE);
 
 		}
 
@@ -157,32 +158,29 @@ public class UserActivity extends Fragment implements OnClickListener {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-		if (resultCode != RESULT_OK) {
-			return;
-		}
-
 		if (requestCode == RESULT_LOAD_IMAGE) {
-			final Bundle extras = data.getExtras();
-
-			if (extras != null) {
+			Bundle extras2 = data.getExtras();
+			if (extras2 != null) {
+				Bitmap bitmap = extras2.getParcelable("data");
+				ivProfilePic.setImageBitmap(bitmap);
 
 				final ParseUser currentUser = ParseUser.getCurrentUser();
 
-				Bitmap bitmap = extras.getParcelable("data");
-				ivProfilePic.setImageBitmap(bitmap);
-
 				ByteArrayOutputStream stream = new ByteArrayOutputStream();
 				bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-				byte[] data1 = stream.toByteArray();
+				byte[] bitmapByte = stream.toByteArray();
 
 				final ParseFile profilePicture = new ParseFile(
-						"profilePicture", data1);
+						"profilePicture", bitmapByte);
 				profilePicture.saveInBackground(new SaveCallback() {
 					public void done(ParseException e) {
 						if (e != null) {
 
 						} else {
 
+							// check to see if ParseFile exists, if it does
+							// delete it and set new ParseFile
+							currentUser.remove("photo");
 							currentUser.put("photo", profilePicture);
 							currentUser.saveInBackground();
 							updateViewsWithProfileInfo();
@@ -192,13 +190,14 @@ public class UserActivity extends Fragment implements OnClickListener {
 
 			}
 		}
+
 	}
 
 	private void updateViewsWithProfileInfo() {
 		ParseUser currentUser = ParseUser.getCurrentUser();
 
-		if (currentUser.getString("displayName") != null) {
-			tvUserName.setText(currentUser.getString("displayName"));
+		if (currentUser.getUsername() != null) {
+			tvUserName.setText(currentUser.getUsername());
 		} else {
 			tvUserName.setText("");
 		}

@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseImageView;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
@@ -22,6 +24,7 @@ public class UserDetailsActivity extends Activity implements OnClickListener {
 
 	TextView tvBio, tvUsername, tvTagline;
 	ImageButton btnAdd, btnBack;
+	ParseImageView ivDetailProfilePic;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,8 @@ public class UserDetailsActivity extends Activity implements OnClickListener {
 		btnAdd.setOnClickListener(this);
 		btnBack = (ImageButton) findViewById(R.id.btn_backUD);
 		btnBack.setOnClickListener(this);
+
+		ivDetailProfilePic = (ParseImageView) findViewById(R.id.imageViewUserDetail);
 
 		Intent intent = getIntent();
 		final String tempUsername = intent.getStringExtra("username");
@@ -60,6 +65,12 @@ public class UserDetailsActivity extends Activity implements OnClickListener {
 					tvUsername.setText(pUsername);
 					tvBio.setText(pBio);
 					tvTagline.setText(pTagline);
+
+					ParseFile imageFile = pUser.getParseFile("photo");
+					if (imageFile != null) {
+						ivDetailProfilePic.setParseFile(imageFile);
+						ivDetailProfilePic.loadInBackground();
+					}
 
 					// query to find if the parse relationship exists to change
 					// the friend icon from white to green/visa versa

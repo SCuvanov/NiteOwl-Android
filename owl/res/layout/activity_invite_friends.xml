@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/lightgreybackgroundrepeat"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/ab_height"
+        android:background="@color/gray_35" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ImageButton
+                android:id="@+id/btn_backIF"
+                android:layout_width="@dimen/width"
+                android:layout_height="fill_parent"
+                android:background="@color/gray_35"
+                android:contentDescription="@string/desc"
+                android:src="@drawable/ico_left" />
+
+            <LinearLayout
+                android:layout_width="@dimen/dim_1"
+                android:layout_height="fill_parent"
+                android:background="@color/purple" >
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_invite"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:singleLine="true"
+                android:tag="bold"
+                android:text="invite"
+                android:textColor="@color/white"
+                android:textSize="@dimen/tex_size_xxxlarge"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="@dimen/dim_1"
+                android:layout_height="fill_parent"
+                android:background="@color/purple" >
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btn_confirmIF"
+                android:layout_width="@dimen/width"
+                android:layout_height="fill_parent"
+                android:background="@color/gray_35"
+                android:contentDescription="@string/desc"
+                android:src="@drawable/ico_check" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dim_1"
+        android:background="@color/purple" >
+    </LinearLayout>
+
+    <!-- START OF LISTVIEW FOR RESULTS -->
+
+    <ListView
+        android:id="@+id/listViewIF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+    <!-- END OF LISTVIEW -->
+
+</LinearLayout>

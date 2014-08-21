@@ -20,10 +20,10 @@
                 android:id="@+id/text_name"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="10dp"
                 android:singleLine="true"
                 android:tag="bold"
                 android:text=""
@@ -86,8 +86,8 @@
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:adjustViewBounds="true"
-                        android:scaleType="fitCenter"
                         android:clickable="true"
+                        android:scaleType="fitCenter"
                         android:src="@drawable/ic_content_picture_gray" />
 
                     <TextView
@@ -114,9 +114,9 @@
                         android:id="@+id/btn_editProfile"
                         android:layout_width="fill_parent"
                         android:layout_height="25dp"
-                        android:background="@drawable/ui_button_gray"
+                        android:background="@drawable/ui_button_purple"
                         android:text="Edit Profile"
-                        android:textColor="@color/gray_35"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/tex_size_normal" />
 
                     <LinearLayout

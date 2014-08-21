@@ -63,31 +63,6 @@ public class UserQueryAdapter extends ParseQueryAdapter<ParseUser> {
 				.findViewById(R.id.textViewSearchTagline);
 		titleTextViewTagline.setText(pUser.getString("tagline"));
 
-		// ivAdd = (ImageView) v.findViewById(R.id.imageViewAdd);
-		// ivAdd.setOnClickListener(new View.OnClickListener() {
-		// public void onClick(View v) {
-		//
-		// final ParseUser currentUser = ParseUser.getCurrentUser();
-		//
-		// if (currentUser != null) {
-		// {
-		//
-		// // structure some type of check to see if the pUser
-		// // already exists as a friend to determine
-		// // whether or not the btnAdd should be colored a
-		// // specific way and if the button unfriends/friends etc.
-		//
-		// ParseRelation<ParseUser> relation = currentUser
-		// .getRelation("Friends");
-		// relation.add(pUser);
-		// currentUser.saveInBackground();
-		//
-		// }
-		// }
-		//
-		// }
-		// });
-		//
 		return v;
 
 	}

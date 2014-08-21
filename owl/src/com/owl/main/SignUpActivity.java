@@ -24,7 +24,6 @@ public class SignUpActivity extends Activity implements OnClickListener {
 	EditText etEmail;
 	EditText etPassword;
 	EditText etPassword2;
-	EditText etDisplayName;
 
 	Context context;
 
@@ -43,7 +42,6 @@ public class SignUpActivity extends Activity implements OnClickListener {
 		etEmail = (EditText) findViewById(R.id.editTextEmail);
 		etPassword = (EditText) findViewById(R.id.editTextPassword);
 		etPassword2 = (EditText) findViewById(R.id.editTextPassword2);
-		etDisplayName = (EditText) findViewById(R.id.editTextDisplayName);
 
 	}
 
@@ -62,8 +60,6 @@ public class SignUpActivity extends Activity implements OnClickListener {
 			String email = etEmail.getText().toString().trim();
 			String password = etPassword.getText().toString().trim();
 			String password2 = etPassword2.getText().toString().trim();
-			String displayName = etDisplayName.getText().toString().trim();
-
 			// //////Parse///////
 
 			ParseUser user = new ParseUser();
@@ -73,7 +69,7 @@ public class SignUpActivity extends Activity implements OnClickListener {
 
 			try {
 				if (username.isEmpty() || email.isEmpty() || password.isEmpty()
-						|| password2.isEmpty() || displayName.isEmpty()) {
+						|| password2.isEmpty()) {
 					if (username.isEmpty()) {
 						etUsername.setHintTextColor(getResources().getColor(
 								R.color.red));
@@ -94,23 +90,15 @@ public class SignUpActivity extends Activity implements OnClickListener {
 								R.color.red));
 						etPassword2.setHint("Re-Type Password");
 					}
-					if (displayName.isEmpty()) {
-						etDisplayName.setHintTextColor(getResources().getColor(
-								R.color.red));
-						etDisplayName.setHint("Enter Display Name");
-					}
 				}
 
 			} finally {
 				if (!username.isEmpty() && !email.isEmpty()
-						&& !displayName.isEmpty() && !password.isEmpty()
 						&& !password2.isEmpty()
 						&& isMatching(password, password2)) {
 					user.setUsername(username);
 					user.setPassword(password);
 					user.setEmail(email);
-
-					user.put("displayName", displayName);
 
 					user.signUpInBackground(new SignUpCallback() {
 						public void done(ParseException e) {

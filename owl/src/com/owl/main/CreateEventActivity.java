@@ -33,6 +33,7 @@ public class CreateEventActivity extends FragmentActivity implements
 	ImageButton btnBack;
 	ImageButton btnCreatePic;
 	ImageButton btnConfirm;
+	ImageButton btnAddFriend;
 	private Dialog progressDialog;
 
 	private static int RESULT_LOAD_IMAGE = 2;
@@ -59,6 +60,9 @@ public class CreateEventActivity extends FragmentActivity implements
 		btnConfirm = (ImageButton) findViewById(R.id.btn_confirm);
 		btnConfirm.setOnClickListener(this);
 
+		btnAddFriend = (ImageButton) findViewById(R.id.btn_friendchooser);
+		btnAddFriend.setOnClickListener(this);
+
 		ivCreate = (ParseImageView) findViewById(R.id.createImageView);
 
 		// edit text
@@ -83,6 +87,7 @@ public class CreateEventActivity extends FragmentActivity implements
 		case (R.id.btn_back1):
 
 			finish();
+			overridePendingTransition(0, 0);
 			break;
 
 		case (R.id.btn_confirm):
@@ -149,7 +154,8 @@ public class CreateEventActivity extends FragmentActivity implements
 					// create access control list, and set object to read-only
 					ParseACL acl = new ParseACL();
 					acl.setPublicReadAccess(true);
-				    acl.setPublicWriteAccess(true); //objects created are writable
+					acl.setPublicWriteAccess(true); // objects created are
+													// writable
 					newEvent.setACL(acl);
 
 					CreateEventActivity.this.progressDialog = ProgressDialog
@@ -170,6 +176,12 @@ public class CreateEventActivity extends FragmentActivity implements
 			}
 
 			break;
+
+		case R.id.btn_friendchooser:
+
+			Intent intent = new Intent(this, InviteFriendsActivity.class);
+			startActivity(intent);
+
 		}
 	}
 
