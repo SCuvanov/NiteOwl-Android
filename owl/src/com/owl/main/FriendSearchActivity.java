@@ -3,25 +3,31 @@ package com.owl.main;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 import com.owl.adapter.UserQueryAdapter;
 import com.parse.ParseUser;
 
-public class FriendSearchActivity extends Activity implements OnClickListener {
+public class FriendSearchActivity extends Activity implements OnClickListener,
+		OnItemClickListener {
 
 	ImageButton btnBack, btnConfirm;
+	ImageView ivAdd;
+
 	EditText etSearch;
 
 	ListView listView;
@@ -37,6 +43,7 @@ public class FriendSearchActivity extends Activity implements OnClickListener {
 
 		// get list view
 		listView = (ListView) findViewById(R.id.listView1);
+		listView.setOnItemClickListener(this);
 
 		btnBack = (ImageButton) findViewById(R.id.btn_back2);
 		btnBack.setOnClickListener(this);
@@ -54,6 +61,7 @@ public class FriendSearchActivity extends Activity implements OnClickListener {
 		case (R.id.btn_back2):
 
 			finish();
+			overridePendingTransition(0, 0);
 			break;
 
 		case (R.id.btn_confirm2):
@@ -77,4 +85,21 @@ public class FriendSearchActivity extends Activity implements OnClickListener {
 
 	}
 
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		// TODO Auto-generated method stub
+
+		final TextView titleTextView = (TextView) view
+				.findViewById(R.id.textViewSearch);
+
+		String pUsername = titleTextView.getText().toString().toLowerCase()
+				.trim();
+
+		Intent intent1 = new Intent(this, UserDetailsActivity.class);
+		intent1.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+		intent1.putExtra("username", pUsername);
+		startActivity(intent1);
+
+	}
 }

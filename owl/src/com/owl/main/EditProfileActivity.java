@@ -1,20 +1,14 @@
 package com.owl.main;
 
+import java.io.ByteArrayOutputStream;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.facebook.FacebookRequestError;
-import com.facebook.Request;
-import com.facebook.Response;
-import com.facebook.model.GraphUser;
-import com.parse.ParseException;
-import com.parse.ParseFacebookUtils;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,10 +17,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.facebook.FacebookRequestError;
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.model.GraphUser;
+import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
+import com.parse.ParseFile;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
 public class EditProfileActivity extends Activity implements OnClickListener {
 
 	EditText etDisplayName, etBio, etTagLine;
 	ImageButton btnConfirmEP, btnBack;
+//	Button btnChangePic;
+//
+//	final int PHOTO_WIDTH = 150;
+//	final int PHOTO_HEIGHT = 150;
 
 	final ParseUser currentUser = ParseUser.getCurrentUser();
 
@@ -43,11 +51,11 @@ public class EditProfileActivity extends Activity implements OnClickListener {
 		btnConfirmEP = (ImageButton) findViewById(R.id.btn_confirmEP);
 		btnConfirmEP.setOnClickListener(this);
 
+//		btnChangePic = (Button) findViewById(R.id.btn_change_picture);
+//		btnChangePic.setOnClickListener(this);
+
 		btnBack = (ImageButton) findViewById(R.id.btn_backEP);
 		btnBack.setOnClickListener(this);
-
-		Button linkFacebookButton = (Button) findViewById(R.id.link_facebook_button);
-		linkFacebookButton.setOnClickListener(this);
 
 	}
 
@@ -82,21 +90,20 @@ public class EditProfileActivity extends Activity implements OnClickListener {
 
 			}
 
-		case R.id.link_facebook_button:
-
-			if (!ParseFacebookUtils.isLinked(currentUser)) {
-				ParseFacebookUtils.link(currentUser, this, new SaveCallback() {
-					@Override
-					public void done(ParseException ex) {
-						if (ParseFacebookUtils.isLinked(currentUser)) {
-							Log.d("MyApp",
-									"Woohoo, user logged in with Facebook!");
-							makeMeRequest();
-						}
-					}
-				});
-			}
-			break;
+//		case R.id.btn_change_picture:
+//			Intent intent = new Intent(
+//					Intent.ACTION_PICK,
+//					android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+//
+//			intent.setType("image/*");
+//			intent.putExtra("crop", "true");
+//			intent.putExtra("scale", true);
+//			intent.putExtra("outputX", PHOTO_WIDTH);
+//			intent.putExtra("outputY", PHOTO_HEIGHT);
+//			intent.putExtra("aspectX", 1);
+//			intent.putExtra("aspectY", 1);
+//			intent.putExtra("return-data", true);
+//			startActivityForResult(intent, 1);
 
 		case R.id.btn_backEP:
 
@@ -108,56 +115,33 @@ public class EditProfileActivity extends Activity implements OnClickListener {
 
 	}
 
-	private void makeMeRequest() {
-		Request request = Request.newMeRequest(ParseFacebookUtils.getSession(),
-				new Request.GraphUserCallback() {
-					@Override
-					public void onCompleted(GraphUser user, Response response) {
-						// handle response
-						if (user != null) {
-							// Create a JSON object to hold the profile info
-							JSONObject userProfile = new JSONObject();
-							try {
-								// Populate the JSON object
-								userProfile.put("facebookId", user.getId());
-								userProfile.put("name", user.getName());
-								// if (user.getLocation().getProperty("name") !=
-								// null) {
-								// userProfile.put("location", (String) user
-								// .getLocation().getProperty("name"));
-								// }
-								// Save the user profile info in a user property
-								ParseUser currentUser = ParseUser
-										.getCurrentUser();
-								currentUser.put("profile", userProfile);
-								currentUser.saveInBackground();
+//	@Override
+//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		if (resultCode != RESULT_OK) {
+//			return;
+//		}
+//
+//		if (requestCode == 1) {
+//			final Bundle extras = data.getExtras();
+//
+//			if (extras != null) {
+//
+//				ParseUser currentUser = ParseUser.getCurrentUser();
+//
+//				Bitmap bitmap = extras.getParcelable("data");
+//
+//				ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//				bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//				byte[] data1 = stream.toByteArray();
+//
+//				ParseFile profilePicture = new ParseFile("profilePicture",
+//						data1);
+//				// photo.saveInBackground();
+//				currentUser.put("photo", profilePicture);
+//				currentUser.saveInBackground();
+//
+//			}
+//		}
+//	}
 
-							} catch (JSONException e) {
-								Log.d(InitializeApplication.TAG,
-										"Error parsing returned user data.");
-							}
-
-						} else if (response.getError() != null) {
-							// handle error
-							if ((response.getError().getCategory() == FacebookRequestError.Category.AUTHENTICATION_RETRY)
-									|| (response.getError().getCategory() == FacebookRequestError.Category.AUTHENTICATION_REOPEN_SESSION)) {
-								Log.d(InitializeApplication.TAG,
-										"The facebook session was invalidated.");
-							} else {
-								Log.d(InitializeApplication.TAG,
-										"Some other error: "
-												+ response.getError()
-														.getErrorMessage());
-							}
-						}
-					}
-				});
-		request.executeAsync();
-
-	}
-
-	private void showNaviActivity() {
-		Intent intent = new Intent(this, NaviActivity.class);
-		startActivity(intent);
-	}
 }

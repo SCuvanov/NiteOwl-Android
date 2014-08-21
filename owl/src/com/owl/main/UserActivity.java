@@ -1,10 +1,10 @@
 package com.owl.main;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.io.ByteArrayOutputStream;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,30 +12,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.facebook.FacebookRequestError;
-import com.facebook.Request;
-import com.facebook.Response;
-import com.facebook.Session;
-import com.facebook.model.GraphUser;
-import com.facebook.widget.ProfilePictureView;
-import com.parse.ParseFacebookUtils;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseImageView;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
-public class UserActivity extends Fragment implements OnClickListener,
-		OnItemClickListener {
+public class UserActivity extends Fragment implements OnClickListener {
 
 	Context context;
-	private ProfilePictureView userProfilePictureView;
+	public ParseImageView ivProfilePic;
 	private TextView tvUserName, tvBio, tvTagLine;
 
 	private static final String TAG = "OwlSample";
+	private static final int RESULT_OK = 0;
+	private static final int RESULT_LOAD_IMAGE = 888;
+
+	final int PHOTO_WIDTH = 500;
+	final int PHOTO_HEIGHT = 500;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,15 +49,6 @@ public class UserActivity extends Fragment implements OnClickListener,
 			// just run the code below, where we would create and return
 			// the view hierarchy; it would just never be used.
 			return null;
-		}
-
-		// making request to facebook graphAPI for users profile
-		// picture/information
-
-		// Fetch Facebook user info if the session is active
-		Session session = ParseFacebookUtils.getSession();
-		if (session != null && session.isOpened()) {
-			makeMeRequest();
 		}
 
 		// Inflate the layout for this fragment
@@ -80,8 +70,10 @@ public class UserActivity extends Fragment implements OnClickListener,
 		tvUserName = (TextView) mLayout.findViewById(R.id.text_name);
 		tvBio = (TextView) mLayout.findViewById(R.id.text_bio);
 		tvTagLine = (TextView) mLayout.findViewById(R.id.text_tagline);
-		userProfilePictureView = (ProfilePictureView) mLayout
-				.findViewById(R.id.userProfilePicture);
+		ivProfilePic = (ParseImageView) mLayout
+				.findViewById(R.id.imageViewUserProfile);
+
+		ivProfilePic.setOnClickListener(this);
 
 		updateViewsWithProfileInfo();
 		return mLayout;
@@ -101,13 +93,6 @@ public class UserActivity extends Fragment implements OnClickListener,
 			// activity showing the login view.
 			showLoginActivity();
 		}
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -136,6 +121,22 @@ public class UserActivity extends Fragment implements OnClickListener,
 			startActivity(intent1);
 			break;
 
+		case R.id.imageViewUserProfile:
+
+			Intent intent2 = new Intent(
+					Intent.ACTION_PICK,
+					android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+			intent2.setType("image/*");
+			intent2.putExtra("crop", "true");
+			intent2.putExtra("scale", true);
+			intent2.putExtra("outputX", PHOTO_WIDTH);
+			intent2.putExtra("outputY", PHOTO_HEIGHT);
+			intent2.putExtra("aspectX", 1);
+			intent2.putExtra("aspectY", 1);
+			intent2.putExtra("return-data", true);
+			startActivityForResult(intent2, RESULT_LOAD_IMAGE);
+
 		}
 
 	}
@@ -153,56 +154,44 @@ public class UserActivity extends Fragment implements OnClickListener,
 		showLoginActivity();
 	}
 
-	private void makeMeRequest() {
-		Request request = Request.newMeRequest(ParseFacebookUtils.getSession(),
-				new Request.GraphUserCallback() {
-					@Override
-					public void onCompleted(GraphUser user, Response response) {
-						// handle response
-						if (user != null) {
-							// Create a JSON object to hold the profile info
-							JSONObject userProfile = new JSONObject();
-							try {
-								// Populate the JSON object
-								userProfile.put("facebookId", user.getId());
-								userProfile.put("name", user.getName());
-								// if (user.getLocation().getProperty("name") !=
-								// null) {
-								// userProfile.put("location", (String) user
-								// .getLocation().getProperty("name"));
-								// }
-								// Save the user profile info in a user property
-								ParseUser currentUser = ParseUser
-										.getCurrentUser();
-								currentUser.put("profile", userProfile);
-								currentUser.saveInBackground();
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-								// Show the user info
-								updateViewsWithProfileInfo();
+		if (resultCode != RESULT_OK) {
+			return;
+		}
 
-							} catch (JSONException e) {
-								Log.d(InitializeApplication.TAG,
-										"Error parsing returned user data.");
-							}
+		if (requestCode == RESULT_LOAD_IMAGE) {
+			final Bundle extras = data.getExtras();
 
-						} else if (response.getError() != null) {
-							// handle error
-							if ((response.getError().getCategory() == FacebookRequestError.Category.AUTHENTICATION_RETRY)
-									|| (response.getError().getCategory() == FacebookRequestError.Category.AUTHENTICATION_REOPEN_SESSION)) {
-								Log.d(InitializeApplication.TAG,
-										"The facebook session was invalidated.");
-								onLogoutButtonClicked();
-							} else {
-								Log.d(InitializeApplication.TAG,
-										"Some other error: "
-												+ response.getError()
-														.getErrorMessage());
-							}
+			if (extras != null) {
+
+				final ParseUser currentUser = ParseUser.getCurrentUser();
+
+				Bitmap bitmap = extras.getParcelable("data");
+				ivProfilePic.setImageBitmap(bitmap);
+
+				ByteArrayOutputStream stream = new ByteArrayOutputStream();
+				bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+				byte[] data1 = stream.toByteArray();
+
+				final ParseFile profilePicture = new ParseFile(
+						"profilePicture", data1);
+				profilePicture.saveInBackground(new SaveCallback() {
+					public void done(ParseException e) {
+						if (e != null) {
+
+						} else {
+
+							currentUser.put("photo", profilePicture);
+							currentUser.saveInBackground();
+							updateViewsWithProfileInfo();
 						}
 					}
 				});
-		request.executeAsync();
 
+			}
+		}
 	}
 
 	private void updateViewsWithProfileInfo() {
@@ -226,24 +215,12 @@ public class UserActivity extends Fragment implements OnClickListener,
 			tvTagLine.setText("");
 		}
 
-		if (currentUser.get("profile") != null) {
-			JSONObject userProfile = currentUser.getJSONObject("profile");
-			try {
-				if (userProfile.getString("facebookId") != null) {
-					String facebookId = userProfile.get("facebookId")
-							.toString();
-
-					userProfilePictureView.setProfileId(facebookId);
-				} else {
-					// Show the default, blank user profile picture
-					userProfilePictureView.setProfileId(null);
-				}
-
-			} catch (JSONException e) {
-				// handle error
-			}
-
+		ParseFile imageFile = currentUser.getParseFile("photo");
+		if (imageFile != null) {
+			ivProfilePic.setParseFile(imageFile);
+			ivProfilePic.loadInBackground();
 		}
+
 	}
 
 }

@@ -43,7 +43,7 @@
                 android:layout_height="fill_parent"
                 android:background="@color/gray_35"
                 android:contentDescription="@string/desc"
-                android:src="@drawable/ico_friends_white" />
+                android:src="@drawable/ico_search_white" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -81,13 +81,14 @@
                     android:layout_marginRight="10dp"
                     android:orientation="vertical" >
 
-                    <com.facebook.widget.ProfilePictureView
-                        android:id="@+id/userProfilePicture"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center_horizontal"
-                        facebook:preset_size="normal" />
+                    <com.parse.ParseImageView
+                        android:id="@+id/imageViewUserProfile"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:clickable="true"
+                        android:src="@drawable/ic_content_picture_gray" />
 
                     <TextView
                         android:id="@+id/text_tagline"

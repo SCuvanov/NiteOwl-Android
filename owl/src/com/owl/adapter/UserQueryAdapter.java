@@ -4,27 +4,28 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.owl.main.R;
-import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseImageView;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 public class UserQueryAdapter extends ParseQueryAdapter<ParseUser> {
 
 	ImageButton btnAdd;
+	ImageView ivAdd;
 
 	public UserQueryAdapter(Context context, final String searchCriteria) {
 
-		//refine query to not show currentUser
+		// refine query to not show currentUser
 
 		super(context, new ParseQueryAdapter.QueryFactory<ParseUser>() {
 			public ParseQuery<ParseUser> create() {
@@ -58,39 +59,35 @@ public class UserQueryAdapter extends ParseQueryAdapter<ParseUser> {
 				.findViewById(R.id.textViewSearch);
 		titleTextView.setText(pUser.getUsername());
 
-		btnAdd = (ImageButton) v.findViewById(R.id.imageButtonAdd);
-		btnAdd.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				// Perform action on click
-				Drawable background = v.getResources().getDrawable(
-						R.drawable.ui_border_green);
-				Drawable img = v.getResources().getDrawable(
-						R.drawable.ico_friend_add_green);
+		final TextView titleTextViewTagline = (TextView) v
+				.findViewById(R.id.textViewSearchTagline);
+		titleTextViewTagline.setText(pUser.getString("tagline"));
 
-				btnAdd.setBackground(background);
-				btnAdd.setImageDrawable(img);
-
-				final ParseUser currentUser = ParseUser.getCurrentUser();
-
-				if (currentUser != null) {
-					{
-
-						// structure some type of check to see if the pUser
-						// already exists as a friend to determine
-						// whether or not the btnAdd should be colored a
-						// specific way and if the button unfriends/friends etc.
-
-						ParseRelation<ParseUser> relation = currentUser
-								.getRelation("Friends");
-						relation.add(pUser);
-						currentUser.saveInBackground();
-
-					}
-				}
-
-			}
-		});
-
+		// ivAdd = (ImageView) v.findViewById(R.id.imageViewAdd);
+		// ivAdd.setOnClickListener(new View.OnClickListener() {
+		// public void onClick(View v) {
+		//
+		// final ParseUser currentUser = ParseUser.getCurrentUser();
+		//
+		// if (currentUser != null) {
+		// {
+		//
+		// // structure some type of check to see if the pUser
+		// // already exists as a friend to determine
+		// // whether or not the btnAdd should be colored a
+		// // specific way and if the button unfriends/friends etc.
+		//
+		// ParseRelation<ParseUser> relation = currentUser
+		// .getRelation("Friends");
+		// relation.add(pUser);
+		// currentUser.saveInBackground();
+		//
+		// }
+		// }
+		//
+		// }
+		// });
+		//
 		return v;
 
 	}

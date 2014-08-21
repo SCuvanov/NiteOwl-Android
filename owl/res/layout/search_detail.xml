@@ -20,8 +20,8 @@
 
             <com.parse.ParseImageView
                 android:id="@+id/imageViewSearch"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
                 android:layout_marginRight="10dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
@@ -33,16 +33,21 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:orientation="horizontal" >
+            android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/textViewSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:text="Large Text"
                 android:textColor="@color/purple"
                 android:textSize="@dimen/tex_size_xxxlarge" />
+
+            <TextView
+                android:id="@+id/textViewSearchTagline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
         </LinearLayout>
 
         <LinearLayout
@@ -52,11 +57,12 @@
             android:layout_marginRight="5dp"
             android:orientation="horizontal" >
 
-            <ImageButton
-                android:id="@+id/imageButtonAdd"
+            <ImageView
+                android:id="@+id/imageViewAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ui_border_gray"
+                android:clickable="true"
                 android:src="@drawable/ico_friend_add_gray" />
         </LinearLayout>
     </LinearLayout>
